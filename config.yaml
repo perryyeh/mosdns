@@ -119,7 +119,7 @@ plugins:
     args:
       concurrent: 5  #修改点，非必须，假如有私有阿里doh，可改为自己ID
       upstreams:
-        - addr: "udp://192.168.0.1"
+        - addr: "udp://10.0.0.1"
         - addr: "udp://223.5.5.5"
         - addr: "udp://119.29.29.29"
         - addr: "udp://2400:3200::1"
