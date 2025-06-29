@@ -101,7 +101,7 @@ plugins:
       upstreams:
         - addr: "https://dns.google/dns-query"
           #dial_addr: "8.8.8.8"
-          #socks5: "192.168.0.120:7891"  #修改点，改为自己的代理
+          #socks5: "198.18.0.2:7891"  #修改点，改为自己的代理
           bootstrap: "198.18.0.2" #修改点，改为域名解析服务器
 
   - tag: forward_cf
@@ -111,7 +111,7 @@ plugins:
       upstreams:
         - addr: "https://dns.cloudflare.com/dns-query"
           #dial_addr: "1.1.1.1"
-          #socks5: "192.168.0.120:7891" #修改点，改为自己的代理
+          #socks5: "198.18.0.2:7891" #修改点，改为自己的代理
           bootstrap: "198.18.0.2" #修改点，改为域名解析服务器
 
   - tag: forward_local
