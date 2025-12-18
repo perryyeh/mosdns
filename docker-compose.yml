@@ -1,0 +1,19 @@
+services:
+  mosdns:
+    image: irinesistiana/mosdns
+    container_name: mosdns
+    hostname: mosdns
+    restart: always
+    mac_address: ${mosdnsmac}
+    networks:
+      macvlan:
+        ipv4_address: ${mosdns4}
+    volumes:
+      - ./config.yaml:/etc/mosdns/config.yaml:ro
+      # 如果你仓库里还有其它文件(比如 rule/geo/)，可以按需挂载：
+      # - ./data:/etc/mosdns/data
+
+networks:
+  macvlan:
+    external: true
+    name: ${MACVLAN_NET}
