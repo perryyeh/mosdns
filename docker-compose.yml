@@ -9,7 +9,7 @@ services:
       macvlan:
         ipv4_address: ${mosdns4}
     volumes:
-      - ./:/etc/mosdns
+      - ./config.yaml:/etc/mosdns/config.yaml
     command: start -c /etc/mosdns/config.yaml
 
 networks:
