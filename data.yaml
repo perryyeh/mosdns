@@ -1,0 +1,42 @@
+plugins:
+  ################## 数据源 ################
+
+  - tag: geoip_cn # cn ip
+    type: ip_set
+    args:
+      files:
+        - "./rule/geoip_cn.txt"
+
+  - tag: geosite_local # 内网域名 -> 路由器
+    type: domain_set
+    args:
+      files:
+        - "./rule/local.txt"
+
+  - tag: geosite_custom # 自定义解析 -> 自定义
+    type: hosts
+    args:
+      files:
+        - "./my/hosts.txt"
+
+  - tag: geosite_cn # cn 域名 + 自定义白名单 -> 国内
+    type: domain_set
+    args:
+      files:
+        - "./my/whitelist.txt"
+        - "./rule/geosite_cn.txt"
+
+  - tag: geosite_proxy # 非 cn 域名 + 自定义灰名单 -> 代理
+    type: domain_set
+    args:
+      files:
+        - "./my/greylist.txt"
+        - "./rule/geosite_geolocation-!cn.txt"
+
+  - tag: geosite_block # 非法域名 + 自定义黑名单 -> 拒绝
+    type: domain_set
+    args:
+      files:
+        - "./my/blacklist.txt"
+        - "./rule/blocklist.txt"
+  

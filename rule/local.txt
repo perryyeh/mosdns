@@ -1,0 +1,6 @@
+domain:arpa
+domain:local
+domain:localhost
+domain:lan
+domain:home
+regexp:^[^.]+$

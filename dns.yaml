@@ -1,0 +1,97 @@
+plugins:
+
+  # no ecs
+  - tag: no_ecs
+    type: "ecs_handler"
+    args:
+      forward: false # 是否转发来自下游的 ecs
+      preset: "" # 发送预设 ecs
+      send: false # 是否发送 ecs
+      mask4: 24
+      mask6: 48 
+  
+  # 附加 ecs cn 信息
+  - tag: ecs_cn
+    type: "ecs_handler"
+    args:
+      forward: false # 是否转发来自下游的 ecs
+      preset: "116.228.111.118" # 发送预设 ecs
+      send: true # 是否发送 ecs
+      mask4: 24 # ipv4 掩码。默认 24
+      mask6: 48 # ipv6 掩码。默认 48
+
+  # google doh dot
+  - tag: google
+    type: forward
+    args:
+      concurrent: 1
+      upstreams:
+        - addr: "https://dns.google/dns-query"
+          # dial_addr: "8.8.8.8" # 8.8.4.4 2001:4860:4860::8888
+          # socks5: "10.86.0.120:6153"  #修改点，改为自己的代理
+          bootstrap: "198.18.0.2" #修改点，改为域名解析服务器
+        - addr: "tls://dns.google:853"
+          # dial_addr: "8.8.8.8"
+          # socks5: "10.86.0.120:6153"
+          bootstrap: "198.18.0.2" #修改点，改为域名解析服务器
+          enable_pipeline: true
+
+  # cloudflare doh dot
+  - tag: cloudflare
+    type: forward
+    args:
+      concurrent: 1
+      upstreams:
+        - addr: "https://cloudflare-dns.com/dns-query"
+          # dial_addr: "1.1.1.1" # 1.0.0.1 2606:4700:4700::1111
+          # socks5: "10.86.0.120:6153"
+          bootstrap: "198.18.0.2"
+        - addr: "tls://cloudflare-dns.com:853"
+          # dial_addr: "1.1.1.1"
+          # socks5: "10.86.0.120:6153"
+          bootstrap: "198.18.0.2"
+          enable_pipeline: true
+
+  # ali doh dot
+  - tag: ali
+    type: forward
+    args:
+      concurrent: 2
+      upstreams:
+        - addr: "https://dns.alidns.com/dns-query"
+          dial_addr: "223.5.5.5"
+        - addr: "https://dns.alidns.com/dns-query"
+          dial_addr: "223.6.6.6"
+        - addr: "https://dns.alidns.com/dns-query"
+          dial_addr: "2400:3200::1"
+        - addr: "tls://dns.alidns.com"
+          enable_pipeline: true
+
+  # dnspod doh dot
+  - tag: dnspod
+    type: forward
+    args:
+      concurrent: 2
+      upstreams:
+        - addr: "https://doh.pub/dns-query"
+          dial_addr: "1.12.12.12"
+        - addr: "https://doh.pub/dns-query"
+          dial_addr: "120.53.53.53"
+        - addr: "tls://dot.pub:853"
+          enable_pipeline: true
+
+  # local dns
+  - tag: local
+    type: forward
+    args:
+      concurrent: 1
+      upstreams:
+        - addr: "udp://10.0.0.1"
+
+  # fake ip
+  - tag: forward_fakeip
+    type: forward
+    args:
+      concurrent: 1
+      upstreams:
+        - addr: "udp://198.18.0.2"
