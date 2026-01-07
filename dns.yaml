@@ -28,11 +28,11 @@ plugins:
       upstreams:
         - addr: "https://dns.google/dns-query"
           # dial_addr: "8.8.8.8" # 8.8.4.4 2001:4860:4860::8888
-          # socks5: "10.86.0.120:6153"  #修改点，改为自己的代理
+          # socks5: "10.0.120:6153"  #修改点，改为自己的代理
           bootstrap: "198.18.0.2" #修改点，改为域名解析服务器
         - addr: "tls://dns.google:853"
           # dial_addr: "8.8.8.8"
-          # socks5: "10.86.0.120:6153"
+          # socks5: "10.0.0.120:6153"
           bootstrap: "198.18.0.2" #修改点，改为域名解析服务器
           enable_pipeline: true
 
@@ -44,11 +44,11 @@ plugins:
       upstreams:
         - addr: "https://cloudflare-dns.com/dns-query"
           # dial_addr: "1.1.1.1" # 1.0.0.1 2606:4700:4700::1111
-          # socks5: "10.86.0.120:6153"
+          # socks5: "10.0.0.120:6153"
           bootstrap: "198.18.0.2"
         - addr: "tls://cloudflare-dns.com:853"
           # dial_addr: "1.1.1.1"
-          # socks5: "10.86.0.120:6153"
+          # socks5: "10.0.0.120:6153"
           bootstrap: "198.18.0.2"
           enable_pipeline: true
 
