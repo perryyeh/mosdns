@@ -1,4 +1,5 @@
 full:6.ipw.cn
+domain:ident.me
 full:test6.ustc.edu.cn
 full:apiauth.quickconnect.to
 domain:mbjlkg.lol
