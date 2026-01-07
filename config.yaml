@@ -6,8 +6,8 @@ api:
   http: "0.0.0.0:9091"
 
 include:
-  - "/etc/mosdns/data.yaml"
-  - "/etc/mosdns/dns.yaml"
+  - "./data.yaml"
+  - "./dns.yaml"
 
 plugins:
   # 转发组 - 国内
