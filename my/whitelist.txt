@@ -1,5 +1,5 @@
-domain:6.ipw.cn
 domain:ident.me
+domain:6.ipw.cn
 domain:test6.ustc.edu.cn
 domain:apiauth.quickconnect.to
 domain:mbjlkg.lol
