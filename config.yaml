@@ -16,7 +16,7 @@ plugins:
     args:
       primary: ali
       secondary: dnspod
-      threshold: 500
+      threshold: 200
       always_standby: true
 
   # 转发组 - 国外/代理
@@ -25,7 +25,7 @@ plugins:
     args:
       primary: google
       secondary: cloudflare
-      threshold: 500
+      threshold: 300
       always_standby: true
 
   # 不在名单中的域名
