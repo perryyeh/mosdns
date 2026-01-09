@@ -24,41 +24,14 @@ plugins:
   - tag: google
     type: forward
     args:
-      concurrent: 2
+      concurrent: 1
       upstreams:
         - addr: "https://dns.google/dns-query"
-          dial_addr: "8.8.8.8"
+          # dial_addr: "8.8.8.8" 8.8.4.4 2001:4860:4860::8888 2001:4860:4860::8844
           # socks5: "10.0.120:6153"  #修改点，改为自己的代理
           bootstrap: "198.18.0.2" #修改点，改为域名解析服务器
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "8.8.4.4"
-          # socks5: "10.0.120:6153"  
-          bootstrap: "198.18.0.2" 
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "2001:4860:4860::8888"
-          # socks5: "10.0.120:6153" 
-          bootstrap: "198.18.0.2" 
-        - addr: "https://dns.google/dns-query"
-          dial_addr: "2001:4860:4860::8844"
-          # socks5: "10.0.120:6153"  
-          bootstrap: "198.18.0.2" 
         - addr: "tls://dns.google:853"
-          dial_addr: "8.8.8.8"
-          # socks5: "10.0.0.120:6153"
-          bootstrap: "198.18.0.2" 
-          enable_pipeline: true
-        - addr: "tls://dns.google:853"
-          dial_addr: "8.8.4.4"
-          # socks5: "10.0.0.120:6153"
-          bootstrap: "198.18.0.2" 
-          enable_pipeline: true
-        - addr: "tls://dns.google:853"
-          dial_addr: "2001:4860:4860::8888"
-          # socks5: "10.0.0.120:6153"
-          bootstrap: "198.18.0.2" 
-          enable_pipeline: true
-        - addr: "tls://dns.google:853"
-          dial_addr: "2001:4860:4860::8844"
+          # dial_addr: "8.8.8.8"
           # socks5: "10.0.0.120:6153"
           bootstrap: "198.18.0.2" 
           enable_pipeline: true
@@ -70,38 +43,11 @@ plugins:
       concurrent: 1
       upstreams:
         - addr: "https://cloudflare-dns.com/dns-query"
-          dial_addr: "1.1.1.1"
-          # socks5: "10.0.0.120:6153"
-          bootstrap: "198.18.0.2"
-        - addr: "https://cloudflare-dns.com/dns-query"
-          dial_addr: "1.0.0.1" 
-          # socks5: "10.0.0.120:6153"
-          bootstrap: "198.18.0.2"
-        - addr: "https://cloudflare-dns.com/dns-query"
-          dial_addr: "2606:4700:4700::1111"
-          # socks5: "10.0.0.120:6153"
-          bootstrap: "198.18.0.2"
-        - addr: "https://cloudflare-dns.com/dns-query"
-          dial_addr: "2606:4700:4700::1001"
+          # dial_addr: "1.1.1.1" 1.0.0.1 2606:4700:4700::1111 2606:4700:4700::1001
           # socks5: "10.0.0.120:6153"
           bootstrap: "198.18.0.2"
         - addr: "tls://cloudflare-dns.com:853"
-          dial_addr: "1.1.1.1"
-          # socks5: "10.0.0.120:6153"
-          bootstrap: "198.18.0.2"
-          enable_pipeline: true
-        - addr: "tls://cloudflare-dns.com:853"
-          dial_addr: "1.0.0.1"
-          # socks5: "10.0.0.120:6153"
-          bootstrap: "198.18.0.2"
-          enable_pipeline: true
-        - addr: "tls://cloudflare-dns.com:853"
-          dial_addr: "2606:4700:4700::1111"
-          # socks5: "10.0.0.120:6153"
-          bootstrap: "198.18.0.2"
-          enable_pipeline: true
-        - addr: "tls://cloudflare-dns.com:853"
-          dial_addr: "2606:4700:4700::1001"
+          # dial_addr: "1.1.1.1"
           # socks5: "10.0.0.120:6153"
           bootstrap: "198.18.0.2"
           enable_pipeline: true
@@ -121,6 +67,16 @@ plugins:
         - addr: "https://dns.alidns.com/dns-query"
           dial_addr: "2400:3200:baba::1"
         - addr: "tls://dns.alidns.com"
+          dial_addr: "223.5.5.5"
+          enable_pipeline: true
+        - addr: "tls://dns.alidns.com"
+          dial_addr: "223.6.6.6"
+          enable_pipeline: true
+        - addr: "tls://dns.alidns.com"
+          dial_addr: "2400:3200::1"
+          enable_pipeline: true
+        - addr: "tls://dns.alidns.com"
+          dial_addr: "2400:3200:baba::1"
           enable_pipeline: true
 
   # dnspod doh dot
@@ -134,6 +90,10 @@ plugins:
         - addr: "https://doh.pub/dns-query"
           dial_addr: "120.53.53.53"
         - addr: "tls://dot.pub:853"
+          dial_addr: "1.12.12.12"
+          enable_pipeline: true
+        - addr: "tls://dot.pub:853"
+          dial_addr: "120.53.53.53"
           enable_pipeline: true
 
   # local dns
