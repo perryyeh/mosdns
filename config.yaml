@@ -35,30 +35,36 @@ plugins:
       - exec: $ecs_cn
       - exec: $forward_remote_group
 
-      # A/AAAA 无 IP 或者是 CN IP → 国内再查一遍（可选：不带 ECS）
+      # 后续 fakeip 只处理 A/AAAA，其他 qtype 直接返回 remote 的结果
+      - matches: "!qtype 1 28"
+        exec: return
+
+      # 不带 ECS 查就近
       - exec: $no_ecs
 
-      - matches:
-        - "qtype 1 28"
-        - "!resp_ip 0.0.0.0/0 ::/0"
-        exec: $forward_cn_group
-
+      # A/AAAA 是 CN IP → 国内再查一遍（获取更合适的国内 IP）
       - matches:
         - "qtype 1 28"
         - "resp_ip $geoip_cn"
         exec: $forward_cn_group
 
-      # 国内查完如果无结果，返回
+      # A/AAAA 无 IP → 国内再查一遍
+      - matches:
+        - "qtype 1 28"
+        - "!resp_ip 0.0.0.0/0 ::/0"
+        exec: $forward_cn_group
+
+      # 国内查完如果无结果，返回（保留 NXDOMAIN/NODATA）
       - matches:
         - "qtype 1 28"
         - "!resp_ip 0.0.0.0/0 ::/0"
         exec: return
 
-      # 国内查完：若是 CN IP，接受返回
+      # 国内查完：若是 CN IP，接受返回真实 IP
       - matches: "resp_ip $geoip_cn"
         exec: return
 
-      # 其他情况：fakeip
+      # 剩下的情况（有 IP 且非 CN） → fakeip
       - exec: drop_resp
       - exec: $forward_fakeip
       - exec: return
