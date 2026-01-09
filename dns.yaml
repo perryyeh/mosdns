@@ -24,16 +24,43 @@ plugins:
   - tag: google
     type: forward
     args:
-      concurrent: 1
+      concurrent: 2
       upstreams:
         - addr: "https://dns.google/dns-query"
-          # dial_addr: "8.8.8.8" # 8.8.4.4 2001:4860:4860::8888
+          dial_addr: "8.8.8.8"
           # socks5: "10.0.120:6153"  #修改点，改为自己的代理
           bootstrap: "198.18.0.2" #修改点，改为域名解析服务器
+        - addr: "https://dns.google/dns-query"
+          dial_addr: "8.8.4.4"
+          # socks5: "10.0.120:6153"  
+          bootstrap: "198.18.0.2" 
+        - addr: "https://dns.google/dns-query"
+          dial_addr: "2001:4860:4860::8888"
+          # socks5: "10.0.120:6153" 
+          bootstrap: "198.18.0.2" 
+        - addr: "https://dns.google/dns-query"
+          dial_addr: "2001:4860:4860::8844"
+          # socks5: "10.0.120:6153"  
+          bootstrap: "198.18.0.2" 
         - addr: "tls://dns.google:853"
-          # dial_addr: "8.8.8.8"
+          dial_addr: "8.8.8.8"
           # socks5: "10.0.0.120:6153"
-          bootstrap: "198.18.0.2" #修改点，改为域名解析服务器
+          bootstrap: "198.18.0.2" 
+          enable_pipeline: true
+        - addr: "tls://dns.google:853"
+          dial_addr: "8.8.4.4"
+          # socks5: "10.0.0.120:6153"
+          bootstrap: "198.18.0.2" 
+          enable_pipeline: true
+        - addr: "tls://dns.google:853"
+          dial_addr: "2001:4860:4860::8888"
+          # socks5: "10.0.0.120:6153"
+          bootstrap: "198.18.0.2" 
+          enable_pipeline: true
+        - addr: "tls://dns.google:853"
+          dial_addr: "2001:4860:4860::8844"
+          # socks5: "10.0.0.120:6153"
+          bootstrap: "198.18.0.2" 
           enable_pipeline: true
 
   # cloudflare doh dot
@@ -43,11 +70,38 @@ plugins:
       concurrent: 1
       upstreams:
         - addr: "https://cloudflare-dns.com/dns-query"
-          # dial_addr: "1.1.1.1" # 1.0.0.1 2606:4700:4700::1111
+          dial_addr: "1.1.1.1"
+          # socks5: "10.0.0.120:6153"
+          bootstrap: "198.18.0.2"
+        - addr: "https://cloudflare-dns.com/dns-query"
+          dial_addr: "1.0.0.1" 
+          # socks5: "10.0.0.120:6153"
+          bootstrap: "198.18.0.2"
+        - addr: "https://cloudflare-dns.com/dns-query"
+          dial_addr: "2606:4700:4700::1111"
+          # socks5: "10.0.0.120:6153"
+          bootstrap: "198.18.0.2"
+        - addr: "https://cloudflare-dns.com/dns-query"
+          dial_addr: "2606:4700:4700::1001"
           # socks5: "10.0.0.120:6153"
           bootstrap: "198.18.0.2"
         - addr: "tls://cloudflare-dns.com:853"
-          # dial_addr: "1.1.1.1"
+          dial_addr: "1.1.1.1"
+          # socks5: "10.0.0.120:6153"
+          bootstrap: "198.18.0.2"
+          enable_pipeline: true
+        - addr: "tls://cloudflare-dns.com:853"
+          dial_addr: "1.0.0.1"
+          # socks5: "10.0.0.120:6153"
+          bootstrap: "198.18.0.2"
+          enable_pipeline: true
+        - addr: "tls://cloudflare-dns.com:853"
+          dial_addr: "2606:4700:4700::1111"
+          # socks5: "10.0.0.120:6153"
+          bootstrap: "198.18.0.2"
+          enable_pipeline: true
+        - addr: "tls://cloudflare-dns.com:853"
+          dial_addr: "2606:4700:4700::1001"
           # socks5: "10.0.0.120:6153"
           bootstrap: "198.18.0.2"
           enable_pipeline: true
@@ -64,6 +118,8 @@ plugins:
           dial_addr: "223.6.6.6"
         - addr: "https://dns.alidns.com/dns-query"
           dial_addr: "2400:3200::1"
+        - addr: "https://dns.alidns.com/dns-query"
+          dial_addr: "2400:3200:baba::1"
         - addr: "tls://dns.alidns.com"
           enable_pipeline: true
 
