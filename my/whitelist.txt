@@ -23,7 +23,6 @@ domain:msftncsi.com
 domain:nn.ci
 domain:config.edge.skype.com
 domain:bing.com
-domain:push-apple.com.akadns.net
 domain:live.com
 domain:msn.com
 domain:ntp.org
@@ -34,7 +33,6 @@ domain:jd.com
 domain:jd.hk
 domain:apple.cn
 domain:me.com
-domain:apple.com
 domain:icloud.com
 domain:icloud-content.com
 domain:push-apple.com.akadns.net
