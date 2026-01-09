@@ -11,7 +11,7 @@ plugins:
     type: domain_set
     args:
       files:
-        - "./rule/local.txt"
+        - "./rule/geosite_local.txt"
 
   - tag: geosite_custom # 自定义解析 -> 自定义
     type: hosts

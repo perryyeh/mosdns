@@ -1,6 +1,8 @@
 domain:arpa
 domain:local
 domain:localhost
+domain:localdomain
 domain:lan
 domain:home
+domain:unifi
 regexp:^[^.]+$
