@@ -27,14 +27,14 @@
    - 直接返回无法解析（NXDOMAIN）
    - 主要用于广告域名、恶意域名等
 
-4. **明确海外站点（my/greylist 和 `geosite:!cn`）**
-   - 直接走 FakeIP 逻辑
-   - 由代理侧决定最终访问出口
-
-5. **明确国内站点（my/whitelist 和 `geosite:cn`）**
+4. **明确国内站点（my/whitelist 和 `geosite:cn`）**
    - 交由 AliDNS / DNSPod 解析
    - 获取就近、低延迟的真实 IP
-
+   - 
+5. **明确海外站点（my/greylist 和 `geosite:!cn`）**
+   - 直接走 FakeIP 逻辑
+   - 由代理侧决定最终访问出口
+   - 
 6. **未命中名单域名**
    - 先使用 Cloudflare / Google 进行解析
    - 根据返回 IP 判断是否属于 `geoip:cn`

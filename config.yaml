@@ -84,15 +84,15 @@ plugins:
       - matches: qname $geosite_block
         exec: return
 
-      # 4. geosite_proxy 走 fakeip 去解析
-      - matches: qname $geosite_proxy
-        exec: $forward_fakeip
+      # 4. geosite_cn 走 ali 和 dnspod 去解析
+      - matches: qname $geosite_cn
+        exec: $forward_cn_group
       - matches: has_resp
         exec: accept
 
-      # 5. geosite_cn 走 ali 和 dnspod 去解析
-      - matches: qname $geosite_cn
-        exec: $forward_cn_group
+      # 5. geosite_proxy 走 fakeip 去解析
+      - matches: qname $geosite_proxy
+        exec: $forward_fakeip
       - matches: has_resp
         exec: accept
 
