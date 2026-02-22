@@ -1,6 +1,6 @@
 services:
   mosdns:
-    image: irinesistiana/mosdns
+    image: irinesistiana/mosdns:latest
     container_name: mosdns
     hostname: mosdns
     restart: always
