@@ -23,7 +23,6 @@ domain:msftncsi.com
 domain:nn.ci
 domain:config.edge.skype.com
 domain:bing.com
-domain:live.com
 domain:msn.com
 domain:ntp.org
 domain:office.com
