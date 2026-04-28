@@ -1,5 +1,0 @@
-services:
-  mosdns:
-    networks:
-      macvlan:
-        ipv6_address: ${mosdns6}

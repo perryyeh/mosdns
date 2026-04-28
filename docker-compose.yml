@@ -4,10 +4,12 @@ services:
     container_name: mosdns
     hostname: mosdns
     restart: always
-    mac_address: ${mosdnsmac}
     networks:
       macvlan:
-        ipv4_address: ${mosdns4}
+        ipv4_address: ${ipv4}
+        ipv6_address: ${ipv6}
+        mac_address: ${macaddress}
+
     volumes:
       - ./:/etc/mosdns/
 
