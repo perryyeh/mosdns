@@ -57,6 +57,7 @@ full:gspe19-cn.ls.apple.com
 full:gspe79-cn-ssl.ls.apple.com
 full:cl2-cn.apple.com
 full:cl4-cn.apple.com
+full:api.cloudflare.com
 domain:dht.libtorrent.org
 domain:dht.transmissionbt.com
 domain:dns.msftncsi.com
