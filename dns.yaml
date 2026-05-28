@@ -71,7 +71,7 @@ plugins:
       concurrent: 2
       upstreams:
         - addr: "https://doh.pub/dns-query"
-          bootstrap: "120.53.53.5"
+          bootstrap: "119.29.29.29"
         - addr: "tls://dot.pub:853"
           bootstrap: "120.53.53.53"
           enable_pipeline: true
