@@ -68,7 +68,7 @@ plugins:
   - tag: dnspod
     type: forward
     args:
-      concurrent: 2
+      concurrent: 1
       upstreams:
         - addr: "https://doh.pub/dns-query"
           bootstrap: "119.29.29.29"
