@@ -66,7 +66,10 @@ plugins:
 
       # 剩下的情况（有 IP 且非 CN） → fakeip
       - exec: drop_resp
-      - exec: $forward_fakeip
+      - matches: "qtype 28"
+        exec: $forward_fakeip6
+      - matches: "qtype 1"
+        exec: $forward_fakeip
       - exec: return
 
   # 主逻辑
@@ -97,7 +100,13 @@ plugins:
         exec: accept
 
       # 5. geosite_proxy 走 fakeip 去解析
-      - matches: qname $geosite_proxy
+      - matches:
+        - qname $geosite_proxy
+        - qtype 28
+        exec: $forward_fakeip6
+      - matches:
+        - qname $geosite_proxy
+        - qtype 1
         exec: $forward_fakeip
       - matches: has_resp
         exec: accept
