@@ -32,6 +32,13 @@ plugins:
   - tag: sequence_not_in_list
     type: sequence
     args:
+      # SVCB/HTTPS (qtype 64/65) 强制 NODATA，防止 ipv6hint/ipv4hint 泄露真实 IP
+      # 必须在 forward 之前拦截，否则 remote 返回的 SVCB 会被透传
+      - matches: "qtype 64 65"
+        exec: reject 0
+      - matches: "qtype 64 65"
+        exec: return
+
       - exec: $ecs_cn
       - exec: $forward_remote_group
 
