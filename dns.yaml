@@ -85,7 +85,7 @@ plugins:
         - addr: "udp://10.0.0.1"
 
   # fake ip
-  - tag: forward_fakeip
+  - tag: forward_fakeipv4
     type: forward
     args:
       concurrent: 1
@@ -93,7 +93,7 @@ plugins:
         - addr: "udp://198.18.0.2"
 
   # fake ip v6
-  - tag: forward_fakeip6
+  - tag: forward_fakeipv6
     type: forward
     args:
       concurrent: 1

@@ -73,12 +73,12 @@ plugins:
 
       # 剩下的情况（有 IP 且非 CN） → fakeip
       - exec: drop_resp
-      # 注意：forward_fakeip6 只有在 fake IPv6 链路确认可通时才能用。
-      # 如果 fake IPv6 不通，AAAA 不能跳 forward_fakeip6，必须改跳 forward_fakeip，强制改成 fake IPv4。
+      # 注意：forward_fakeipv6 只有在 fake IPv6 链路确认可通时才能用。
+      # 如果 fake IPv6 不通，AAAA 不能跳 forward_fakeipv6，必须改跳 forward_fakeipv4，强制改成 fake IPv4。
       - matches: "qtype 28"
-        exec: $forward_fakeip6
+        exec: $forward_fakeipv6
       - matches: "qtype 1"
-        exec: $forward_fakeip
+        exec: $forward_fakeipv4
       - exec: return
 
   # 主逻辑
@@ -109,16 +109,16 @@ plugins:
         exec: accept
 
       # 5. geosite_proxy 走 fakeip 去解析
-      # 注意：forward_fakeip6 只有在 fake IPv6 链路确认可通时才能用。
-      # 如果 fake IPv6 不通，AAAA 不能跳 forward_fakeip6，必须改跳 forward_fakeip，强制改成 fake IPv4。
+      # 注意：forward_fakeipv6 只有在 fake IPv6 链路确认可通时才能用。
+      # 如果 fake IPv6 不通，AAAA 不能跳 forward_fakeipv6，必须改跳 forward_fakeipv4，强制改成 fake IPv4。
       - matches:
         - qname $geosite_proxy
         - qtype 28
-        exec: $forward_fakeip6
+        exec: $forward_fakeipv6
       - matches:
         - qname $geosite_proxy
         - qtype 1
-        exec: $forward_fakeip
+        exec: $forward_fakeipv4
       - matches: has_resp
         exec: accept
 
