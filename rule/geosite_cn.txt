@@ -85,7 +85,6 @@ full:clickserver.googleads.com
 full:client-api.itunes.apple.com
 full:clientflow.apple.com
 full:clientflow.apple.com.akadns.net
-full:clientservices.googleapis.com
 full:cma.itunes.apple.com
 full:cn-smp-paymentservices.apple.com
 full:cn.download.nvidia.com
@@ -94,7 +93,6 @@ full:cn.windowssearch.com
 full:communities.apple.com
 full:configuration.apple.com
 full:configuration.apple.com.akadns.net
-full:crashlyticsreports-pa.googleapis.com
 full:crl-lb.apple.com.akadns.net
 full:crl.apple.com
 full:crl.pki.goog
@@ -127,14 +125,11 @@ full:download.qpdp1.net
 full:download.tensorflow.google.com
 full:download.visualstudio.microsoft.com
 full:downloaddispatch.itunes.apple.com
-full:emmapplecodevice.googleapis.com
 full:emoi-cncdn.bing.com
 full:experiments.apple.com
 full:f.c2r.ts.cdn.office.net
 full:fides-pol.apple.com
 full:firebase-settings.crashlytics.com
-full:fontfiles.googleapis.com
-full:fonts.googleapis.com
 full:fs.microsoft.com
 full:g3doc.corp.google.com
 full:geetest.datasink.sensorsdata.cn
@@ -183,7 +178,6 @@ full:images-cn.ssl-images-amazon.com
 full:images.apple.com
 full:images.apple.com.akadns.net
 full:images.apple.com.edgekey.net.globalredir.akadns.net
-full:imasdk.googleapis.com
 full:inappcheck-cn.itunes-apple.com.akadns.net
 full:inappcheck-lb.itunes-apple.com.akadns.net
 full:inappcheck.itunes.apple.com
@@ -272,7 +266,6 @@ full:pancake.cdn-apple.com.akadns.net
 full:pba0.apple.com
 full:pd-nk.itunes.apple.com
 full:pd.itunes.apple.com
-full:performanceparameters.googleapis.com
 full:pki-goog.l.google.com
 full:play.1ucrs.com
 full:play.itunes.apple.com
@@ -318,12 +311,10 @@ full:redirector.gvt1.com
 full:redirector.offline-maps.gvt1.com
 full:redirector.snap.gvt1.com
 full:redirector.xn--ngstr-lra8j.com
-full:regioninfo-pa.googleapis.com
 full:res-1.cdn.office.net
 full:res.cdn.office.net
 full:reserve-prime.apple.com
 full:s.mzstatic.com
-full:safebrowsing.googleapis.com
 full:scanservice1.qatp1.net
 full:scanservice1.qcpp1.net
 full:scanservice1.qpdp1.net
@@ -352,7 +343,6 @@ full:ssl-google-analytics.l.google.com
 full:sslredirect.corp.google.com
 full:staging-controlbe.floonet.goog
 full:staging-databe.floonet.goog
-full:staging-regioninfo-pa.googleapis.com
 full:staging.databe.floonet.goog
 full:static-login.gog-statics.com
 full:static.gc.apple.com
@@ -391,7 +381,6 @@ full:swscan-cdn.apple.com.akadns.net
 full:swscan.apple.com
 full:sylvan.apple.com
 full:sync.itunes.apple.com
-full:tac.googleapis.com
 full:techstop.corp.google.com
 full:tesla-cdn.thron.cn
 full:test.bugs-qa.chromium.org
@@ -412,7 +401,6 @@ full:uberproxy.corp.google.com
 full:uberproxy4.corp.google.com
 full:uberproxy6.corp.google.com
 full:update.crashlytics.com
-full:update.googleapis.com
 full:updates-http.cdn-apple.com
 full:updates-http.cdn-apple.com.akadns.net
 full:updates.cdn-apple.com
@@ -423,7 +411,6 @@ full:valid.origin-apple.com.akadns.net
 full:vext.corp.google.com
 full:vscode.download.prss.microsoft.com
 full:vz.download.prss.microsoft.com
-full:wear.googleapis.com
 full:weather-data.apple.com
 full:weather-data.apple.com.akadns.net
 full:weather-map.apple.com
