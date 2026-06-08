@@ -28,12 +28,20 @@ plugins:
       threshold: 100
       always_standby: true
 
-  # 兜底判定为国内 IP 的候选白名单缓存
-  - tag: cache_not_in_list_cn
+  # 兜底判定为真实国内 IP 的候选白名单缓存
+  - tag: cache_not_in_list_direct
     type: cache
     args:
       size: 20000
-      dump_file: "./tmp/not_in_list_cn.txt"
+      dump_file: "./tmp/direct.txt"
+      dump_interval: 180
+
+  # 兜底判定为 fakeip 的候选灰名单缓存
+  - tag: cache_not_in_list_fake
+    type: cache
+    args:
+      size: 20000
+      dump_file: "./tmp/fake.txt"
       dump_interval: 180
 
   # 不在名单中的域名
@@ -77,7 +85,7 @@ plugins:
 
       # 国内查完：若是 CN IP，记录到候选白名单缓存并接受返回真实 IP
       - matches: "resp_ip $geoip_cn"
-        exec: $cache_not_in_list_cn
+        exec: $cache_not_in_list_direct
       - matches: "resp_ip $geoip_cn"
         exec: return
 
@@ -89,6 +97,8 @@ plugins:
         exec: $forward_fakeipv6
       - matches: "qtype 1"
         exec: $forward_fakeipv4
+      - matches: "resp_ip 198.18.0.0/15 fd00:6152:0:9::/64"
+        exec: $cache_not_in_list_fake
       - exec: return
 
   # 主逻辑
