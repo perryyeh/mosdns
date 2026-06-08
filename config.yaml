@@ -28,22 +28,6 @@ plugins:
       threshold: 100
       always_standby: true
 
-  # 兜底判定为真实国内 IP 的候选白名单缓存
-  - tag: cache_not_in_list_direct
-    type: cache
-    args:
-      size: 20000
-      dump_file: "./tmp/direct.txt"
-      dump_interval: 180
-
-  # 兜底判定为 fakeip 的候选灰名单缓存
-  - tag: cache_not_in_list_fake
-    type: cache
-    args:
-      size: 20000
-      dump_file: "./tmp/fake.txt"
-      dump_interval: 180
-
   # 不在名单中的域名
   - tag: sequence_not_in_list
     type: sequence

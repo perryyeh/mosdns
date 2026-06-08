@@ -39,4 +39,19 @@ plugins:
       files:
         - "./my/blacklist.txt"
         - "./rule/blocklist.txt"
-  
+
+  # 兜底判定为真实国内 IP 的候选白名单缓存
+  - tag: cache_not_in_list_direct
+    type: cache
+    args:
+      size: 30000
+      dump_file: "./tmp/direct.dump"
+      dump_interval: 180
+
+  # 兜底判定为 fakeip 的候选灰名单缓存
+  - tag: cache_not_in_list_fake
+    type: cache
+    args:
+      size: 30000
+      dump_file: "./tmp/fake.dump"
+      dump_interval: 180
