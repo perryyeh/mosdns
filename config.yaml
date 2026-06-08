@@ -67,8 +67,10 @@ plugins:
         - "!resp_ip 0.0.0.0/0 ::/0"
         exec: return
 
-      # 国内查完：若是 CN IP，记录到候选白名单缓存并接受返回真实 IP
-      - matches: "resp_ip $geoip_cn"
+      # 国内查完：若是 CN IP，按开关记录到候选白名单缓存并接受返回真实 IP
+      - matches:
+        - "env DUMP_NOT_IN_LIST true"
+        - "resp_ip $geoip_cn"
         exec: $cache_not_in_list_direct
       - matches: "resp_ip $geoip_cn"
         exec: return
@@ -81,7 +83,9 @@ plugins:
         exec: $forward_fakeipv6
       - matches: "qtype 1"
         exec: $forward_fakeipv4
-      - matches: "resp_ip 198.18.0.0/15 fd00:6152:0:9::/64"
+      - matches:
+        - "env DUMP_NOT_IN_LIST true"
+        - "resp_ip 198.18.0.0/15 fd00:6152:0:9::/64"
         exec: $cache_not_in_list_fake
       - exec: return
 

@@ -4,6 +4,8 @@ services:
     container_name: mosdns
     hostname: mosdns
     restart: always
+    environment:
+      - DUMP_NOT_IN_LIST=false
     networks:
       macvlan:
         ipv4_address: ${ipv4}
