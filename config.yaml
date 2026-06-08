@@ -67,7 +67,9 @@ plugins:
         - "!resp_ip 0.0.0.0/0 ::/0"
         exec: return
 
-      # 国内查完：若是 CN IP，接受返回真实 IP
+      # 国内查完：若是 CN IP，记录候选白名单并接受返回真实 IP
+      - matches: "resp_ip $geoip_cn"
+        exec: query_summary not_in_list_cn
       - matches: "resp_ip $geoip_cn"
         exec: return
 
