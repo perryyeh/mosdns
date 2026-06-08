@@ -48,6 +48,7 @@
 ```text
 rule/     # 公共规则（geosite、geoip、通用分流规则）
 my/       # 自定义规则（特殊映射、黑名单、白名单、灰名单）
+tmp/      # 运行时 dump：记录未命中名单域名的分流结果（direct.dump / fake.dump）
 ```
 
 
