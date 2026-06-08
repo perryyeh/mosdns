@@ -44,6 +44,7 @@ domain:bingapistatistics.com
 domain:bingsandbox.com
 domain:bingvisualsearch.com
 domain:bingworld.com
+domain:1password.com
 keyword:apiproxy-device-prod-nlb-
 keyword:dualstack.apiproxy-
 keyword:dualstack.ichnaea-web-
