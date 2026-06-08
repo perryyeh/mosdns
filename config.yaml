@@ -1,6 +1,6 @@
 log:
   level: info
-  file: ""
+  file: "./tmp/not_in_list_cn.txt"
 
 api:
   http: "0.0.0.0:9091"
