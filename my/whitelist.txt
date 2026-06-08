@@ -84,3 +84,4 @@ keyword:aaplimg
 keyword:akadns
 keyword:akamai
 keyword:qtlcdn
+domain:gcloudcache.com
