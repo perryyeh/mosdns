@@ -85,3 +85,11 @@ keyword:akadns
 keyword:akamai
 keyword:qtlcdn
 domain:gcloudcache.com
+domain:boc.cn
+domain:cgbchina.com
+domain:validate.perfdrive.com
+domain:arcot.com
+domain:mysmartadvisor.com
+domain:oyunfor.com
+domain:visa.vfsglobal.com
+domain:amazon.cn
