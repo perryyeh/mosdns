@@ -45,6 +45,7 @@ plugins:
     type: cache
     args:
       size: 30000
+      lazy_cache_ttl: 86400
       dump_file: "./tmp/direct.dump"
       dump_interval: 180
 
@@ -53,5 +54,6 @@ plugins:
     type: cache
     args:
       size: 30000
+      lazy_cache_ttl: 86400
       dump_file: "./tmp/fake.dump"
       dump_interval: 180
