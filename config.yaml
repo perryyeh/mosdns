@@ -37,6 +37,19 @@ plugins:
       - matches: "qtype 1"
         exec: $forward_fakeipv4
 
+  # proxy 域名通用处理：拦截 64/65，A/AAAA 走 fakeip，其他走代理直查
+  - tag: sequence_proxy_fakeip
+    type: sequence
+    args:
+      - matches: "qtype 64 65"
+        exec: reject 0
+      - matches: "qtype 64 65"
+        exec: return
+      - exec: $sequence_fakeip
+      - matches: has_resp
+        exec: return
+      - exec: $forward_proxy_group
+
   # 不在名单中的域名
   - tag: sequence_not_in_list
     type: sequence
@@ -111,22 +124,8 @@ plugins:
         exec: return
 
       # 4. 自定义灰名单：走 fakeip，压过自定义白名单里的宽泛规则和公共 direct
-      # SVCB/HTTPS 强制 NODATA，防止 ipv6hint/ipv4hint 泄露真实 IP
-      - matches:
-        - qname $geosite_my_greylist
-        - qtype 64 65
-        exec: reject 0
-      - matches:
-        - qname $geosite_my_greylist
-        - qtype 64 65
-        exec: return
       - matches: qname $geosite_my_greylist
-        exec: $sequence_fakeip
-      - matches: has_resp
-        exec: accept
-      # 非 A/AAAA：代理直查
-      - matches: qname $geosite_my_greylist
-        exec: $forward_proxy_group
+        exec: $sequence_proxy_fakeip
       - matches: has_resp
         exec: accept
 
@@ -143,22 +142,8 @@ plugins:
         exec: return
 
       # 7. 公共 proxy：走 fakeip，优先于公共 direct，降低污染风险
-      # SVCB/HTTPS 强制 NODATA，防止 ipv6hint/ipv4hint 泄露真实 IP
-      - matches:
-        - qname $geosite_proxy
-        - qtype 64 65
-        exec: reject 0
-      - matches:
-        - qname $geosite_proxy
-        - qtype 64 65
-        exec: return
       - matches: qname $geosite_proxy
-        exec: $sequence_fakeip
-      - matches: has_resp
-        exec: accept
-      # 非 A/AAAA：代理直查
-      - matches: qname $geosite_proxy
-        exec: $forward_proxy_group
+        exec: $sequence_proxy_fakeip
       - matches: has_resp
         exec: accept
 
