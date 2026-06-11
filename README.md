@@ -29,8 +29,9 @@
    - 直接返回 NXDOMAIN
 
 4. **自定义灰名单（my/greylist.txt）**
-   - 走 FakeIP，压过自定义白名单里的宽泛规则和公共 direct
-   - A 记录走 forward_fakeipv4，AAAA 走 forward_fakeipv6
+   - 压过自定义白名单里的宽泛规则和公共 direct，命中后不降级到后续规则
+   - SVCB/HTTPS（qtype 64/65）直接返回 NODATA
+   - A 记录走 forward_fakeipv4，AAAA 走 forward_fakeipv6，其他 qtype 返回 Cloudflare / Google 真实结果
 
 5. **自定义白名单（my/whitelist.txt）**
    - 走 AliDNS / Tencent DNS 直连解析，压过公共 proxy
@@ -39,20 +40,20 @@
    - 直接返回 NXDOMAIN
 
 7. **公共代理域名（rule/geosite_proxy.txt）**
-   - 走 FakeIP，优先于公共 direct，降低 DNS 污染风险
-   - A 记录走 forward_fakeipv4，AAAA 走 forward_fakeipv6
+   - 优先于公共 direct，命中后不降级到后续规则
+   - SVCB/HTTPS（qtype 64/65）直接返回 NODATA
+   - A 记录走 forward_fakeipv4，AAAA 走 forward_fakeipv6，其他 qtype 返回 Cloudflare / Google 真实结果
 
 8. **公共直连域名（rule/geosite_direct.txt + geosite_applecn.txt + geosite_googlecn.txt）**
    - 走 AliDNS / Tencent DNS 直连解析
 
 9. **未命中名单域名（兜底逻辑）**
    - 先拦截 SVCB/HTTPS（qtype 64/65），直接返回 NODATA，防止 IPv4Hint/IPv6Hint 泄露真实 IP
-   - 带 ECS（上海电信）查询 Cloudflare / Google
-   - 非 A/AAAA 记录直接返回 remote 结果
-   - 不带 ECS 再查一遍，用于后续 IP 归属判断
-   - 根据返回 IP 判断是否属于 geoip:cn：
-     - **属于 CN**：再用 AliDNS / Tencent DNS 解析一次，获取国内最优 IP → 记录到 tmp/not-in-list-direct.txt
-     - **无 IP（NXDOMAIN/NODATA）**：再用 AliDNS / Tencent DNS 解析一次；仍无结果则返回原始结果
+   - 先带 ECS（上海电信）查询 Cloudflare / Google，用返回 IP 判定后续路径
+   - 非 A/AAAA 记录直接返回 Cloudflare / Google 真实结果
+   - 根据 A/AAAA 返回 IP 判断：
+     - **属于 CN**：清 ECS 后用 AliDNS / Tencent DNS 再查一次；若仍是 CN IP，返回真实 IP 并记录到 tmp/not-in-list-direct.txt；若变成海外 IP，走 FakeIP
+     - **无 IP（NXDOMAIN/NODATA）**：清 ECS 后用 AliDNS / Tencent DNS 补查；仍无结果则返回空结果
      - **不属于 CN**：走 FakeIP 逻辑 → 记录到 tmp/not-in-list-proxy.txt
 
 
