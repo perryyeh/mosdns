@@ -99,3 +99,10 @@ plugins:
       concurrent: 1
       upstreams:
         - addr: "udp://[fd00:6152::2]:53"
+
+  # fakeip 地址段，用于匹配 fakeip 返回结果
+  - tag: fakeip_cidr
+    type: ip_set
+    args:
+      files:
+        - "./rule/fakeip_cidr.txt"

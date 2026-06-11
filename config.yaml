@@ -98,7 +98,7 @@ plugins:
       # 剩下的情况（A/AAAA 有 IP 且非 CN） → fakeip
       - exec: drop_resp
       - exec: $sequence_fakeip
-      - matches: "resp_ip 198.18.0.0/15 fd00:6152:0:9::/64"
+      - matches: "resp_ip $fakeip_cidr"
         exec: query_summary not_in_list_fake
       - exec: return
 
