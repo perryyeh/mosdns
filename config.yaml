@@ -115,6 +115,11 @@ plugins:
         exec: $sequence_fakeip
       - matches: has_resp
         exec: accept
+      # 非 A/AAAA：代理直查
+      - matches: qname $geosite_my_greylist
+        exec: $forward_proxy_group
+      - matches: has_resp
+        exec: accept
 
       # 5. 自定义白名单：走 ali 和 tencent，压过公共 proxy
       - matches: qname $geosite_my_whitelist
@@ -131,6 +136,11 @@ plugins:
       # 7. 公共 proxy：走 fakeip，优先于公共 direct，降低污染风险
       - matches: qname $geosite_proxy
         exec: $sequence_fakeip
+      - matches: has_resp
+        exec: accept
+      # 非 A/AAAA：代理直查
+      - matches: qname $geosite_proxy
+        exec: $forward_proxy_group
       - matches: has_resp
         exec: accept
 
