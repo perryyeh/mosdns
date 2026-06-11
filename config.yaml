@@ -1,6 +1,6 @@
 log:
   level: info
-  file: ""
+  file: "/dev/shm/mosdns.log"
 
 api:
   http: "0.0.0.0:9091"
