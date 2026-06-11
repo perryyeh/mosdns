@@ -13,45 +13,46 @@ plugins:
       files:
         - "./rule/geosite_local.txt"
 
-  - tag: geosite_custom # 自定义解析 -> 自定义
+  - tag: geosite_my_hosts # 自定义解析 -> 自定义
     type: hosts
     args:
       files:
         - "./my/hosts.txt"
 
-  - tag: geosite_cn # cn 域名 + 自定义白名单 -> 国内
-    type: domain_set
-    args:
-      files:
-        - "./my/whitelist.txt"
-        - "./rule/geosite_cn.txt"
-
-  - tag: geosite_proxy # 非 cn 域名 + 自定义灰名单 -> 代理
-    type: domain_set
-    args:
-      files:
-        - "./my/greylist.txt"
-        - "./rule/geosite_geolocation-!cn.txt"
-
-  - tag: geosite_block # 非法域名 + 自定义黑名单 -> 拒绝
+  - tag: geosite_my_blacklist # 自定义黑名单 -> 拒绝（最高优先级）
     type: domain_set
     args:
       files:
         - "./my/blacklist.txt"
-        - "./rule/blocklist.txt"
 
-  # 兜底判定为真实国内 IP 的候选白名单缓存
-  - tag: cache_not_in_list_direct
-    type: cache
+  - tag: geosite_my_greylist # 自定义灰名单 -> 代理（压过自定义白名单和公共 cn）
+    type: domain_set
     args:
-      size: 30000
-      dump_file: "./tmp/direct.dump"
-      dump_interval: 180
+      files:
+        - "./my/greylist.txt"
 
-  # 兜底判定为 fakeip 的候选灰名单缓存
-  - tag: cache_not_in_list_fake
-    type: cache
+  - tag: geosite_my_whitelist # 自定义白名单 -> 国内（压过公共 proxy）
+    type: domain_set
     args:
-      size: 30000
-      dump_file: "./tmp/fake.dump"
-      dump_interval: 180
+      files:
+        - "./my/whitelist.txt"
+
+  - tag: geosite_block # 公共非法域名 -> 拒绝
+    type: domain_set
+    args:
+      files:
+        - "./rule/geosite_block.txt"
+
+  - tag: geosite_direct # 公共 direct 域名 -> 国内
+    type: domain_set
+    args:
+      files:
+        - "./rule/geosite_direct.txt"
+        - "./rule/geosite_applecn.txt"
+        - "./rule/geosite_googlecn.txt"
+
+  - tag: geosite_proxy # 公共 proxy 域名 -> 代理
+    type: domain_set
+    args:
+      files:
+        - "./rule/geosite_proxy.txt"

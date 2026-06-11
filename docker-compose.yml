@@ -12,6 +12,7 @@ services:
         driver_opts:
           com.docker.network.endpoint.sysctls: net.ipv6.conf.IFNAME.accept_ra_rt_info_max_plen=128
 
+    command: ["/bin/sh", "/etc/mosdns/cron/start.sh"]
     volumes:
       - ./:/etc/mosdns/
 

@@ -64,8 +64,8 @@ plugins:
           bootstrap: "223.6.6.6"
           enable_pipeline: true
 
-  # dnspod doh dot
-  - tag: dnspod
+  # tencent doh dot
+  - tag: tencent
     type: forward
     args:
       concurrent: 1

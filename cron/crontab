@@ -1,0 +1,5 @@
+# mosdns rule sync - daily at 0:00 AM
+0 0 * * * /etc/mosdns/cron/sync-rules.sh >> /etc/mosdns/tmp/sync-rules.log 2>&1
+
+# mosdns candidate domain sync - daily at 0:15 AM
+15 0 * * * /etc/mosdns/cron/sync-candidates.sh >> /etc/mosdns/tmp/sync-candidates.log 2>&1
