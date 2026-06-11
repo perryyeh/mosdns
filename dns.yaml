@@ -104,5 +104,6 @@ plugins:
   - tag: fakeip_cidr
     type: ip_set
     args:
-      files:
-        - "./rule/fakeip_cidr.txt"
+      ips:
+        - "198.18.0.0/15"
+        - "fd00:6152:0:9::/64"
