@@ -51,10 +51,6 @@ plugins:
       - exec: $ecs_cn
       - exec: $forward_proxy_group
 
-      # 后续 fakeip 只处理 A/AAAA，其他 qtype 直接返回 remote 的结果
-      - matches: "!qtype 1 28"
-        exec: return
-
       # 不带 ECS 查就近
       - exec: $no_ecs
 
@@ -82,7 +78,11 @@ plugins:
       - matches: "resp_ip $geoip_cn"
         exec: return
 
-      # 剩下的情况（有 IP 且非 CN） → fakeip
+      # 非 A/AAAA：直接返回 remote 结果（无需 fakeip）
+      - matches: "!qtype 1 28"
+        exec: return
+
+      # 剩下的情况（A/AAAA 有 IP 且非 CN） → fakeip
       - exec: drop_resp
       - exec: $sequence_fakeip
       - matches: "resp_ip 198.18.0.0/15 fd00:6152:0:9::/64"
