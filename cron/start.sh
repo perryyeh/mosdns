@@ -1,5 +1,7 @@
 #!/bin/sh
-# mosdns entrypoint - start crond then mosdns
+# mosdns entrypoint - start crond, then mosdns
+
+set -e
 
 # Ensure runtime directories exist
 mkdir -p /etc/mosdns/tmp

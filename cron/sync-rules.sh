@@ -6,9 +6,13 @@
 
 set -e
 
+CRON_ENV="/etc/mosdns/cron/env"
+[ -f "$CRON_ENV" ] && . "$CRON_ENV"
+
 RULES_DIR="/etc/mosdns/rule"
 CONF="/etc/mosdns/cron/sync.conf"
 TMPDIR="/tmp/mosdns-rule-update.$$"
+RELOAD_MARK="/etc/mosdns/tmp/reload-needed"
 
 cleanup() {
     rm -rf "$TMPDIR"
@@ -18,6 +22,11 @@ trap cleanup EXIT
 mkdir -p "$TMPDIR" "$RULES_DIR"
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"; }
+
+if [ "${MOSDNS_SYNC_RULES_ENABLED:-1}" != "1" ]; then
+    log "rule sync disabled"
+    exit 0
+fi
 
 DNS_CONF="/etc/mosdns/dns.yaml"
 
@@ -223,13 +232,19 @@ while IFS='|' read -r filename enabled interval url; do
             ;;
     esac
 
-    mv -f "$out" "$dst"
-    log "  wrote $(wc -l < "$dst") lines to $dst"
-    updated=1
+    if [ -f "$dst" ] && cmp -s "$out" "$dst"; then
+        log "  unchanged $dst"
+        rm -f "$out"
+    else
+        mv -f "$out" "$dst"
+        log "  wrote $(wc -l < "$dst") lines to $dst"
+        touch "$RELOAD_MARK"
+        updated=1
+    fi
 done < "$CONF"
 
 if [ "$updated" -eq 1 ]; then
     log "update complete"
 else
-    log "no sources updated"
+    log "no source files changed"
 fi
