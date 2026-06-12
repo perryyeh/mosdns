@@ -3,6 +3,8 @@ services:
     image: irinesistiana/mosdns:latest
     container_name: mosdns
     hostname: mosdns
+    environment:
+      - TZ=CST-8
     restart: always
     networks:
       macvlan:
