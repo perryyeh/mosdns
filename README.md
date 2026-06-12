@@ -49,12 +49,12 @@
 
 9. **未命中名单域名（兜底逻辑）**
    - 先拦截 SVCB/HTTPS（qtype 64/65），直接返回 NODATA，防止 IPv4Hint/IPv6Hint 泄露真实 IP
-   - 先带 ECS（上海电信）查询 Cloudflare / Google，用返回 IP 判定后续路径
-   - 非 A/AAAA 记录直接返回 Cloudflare / Google 真实结果
-   - 根据 A/AAAA 返回 IP 判断：
-     - **属于 CN**：清 ECS 后用 AliDNS / Tencent DNS 再查一次；若仍是 CN IP，返回真实 IP 并记录到 tmp/not-in-list-direct.txt；若变成海外 IP，走 FakeIP
-     - **无 IP（NXDOMAIN/NODATA）**：清 ECS 后用 AliDNS / Tencent DNS 补查；仍无结果则返回空结果
-     - **不属于 CN**：走 FakeIP 逻辑 → 记录到 tmp/not-in-list-proxy.txt
+   - 其余请求先带 ECS（上海电信）查询 Cloudflare / Google，用返回结果判定后续路径
+   - 非 A/AAAA 记录不参与国内/海外 IP 判定，直接返回 Cloudflare / Google 真实结果
+   - A/AAAA 根据 Cloudflare / Google 返回结果判断：
+     - **无 IP（NXDOMAIN/NODATA）**：不再补查 AliDNS / Tencent DNS，直接走 FakeIP 兜底，避免空结果探测域名触达国内 DNS
+     - **属于 CN**：清 ECS 后用 AliDNS / Tencent DNS 再查一次；若仍是 CN IP，返回真实 IP 并记录到 tmp/not-in-list-direct.txt；若变成海外/非 CN IP，走 FakeIP
+     - **不属于 CN**：走 FakeIP 逻辑，并记录到 tmp/not-in-list-proxy.txt
 
 
 ## 📖 目录结构
