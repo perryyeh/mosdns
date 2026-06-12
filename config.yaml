@@ -25,7 +25,7 @@ plugins:
     args:
       primary: cloudflare
       secondary: google
-      threshold: 100
+      threshold: 50
       always_standby: true
 
   # fakeip 分发：AAAA → v6, A → v4
@@ -61,22 +61,16 @@ plugins:
       - matches: "qtype 64 65"
         exec: return
 
-      # 先带 ECS 查 Cloudflare/Google，用返回 IP 判定走直连还是 fakeip
+      # 先带 ECS 查 Cloudflare/Google：
+      # - 非 A/AAAA：不参与国内/海外 IP 判定，直接返回 Cloudflare/Google 真实结果。
+      # - A/AAAA 返回空：不补查国内 DNS，后续交给 fakeip 兜底。
+      # - A/AAAA 返回 CN IP：清 ECS 后用国内 DNS 重查，拿更合适的国内 IP。
+      # - A/AAAA 返回海外 IP：后续交给 fakeip。
       - exec: $ecs_cn
       - exec: $forward_proxy_group
 
-      # A/AAAA 无 IP → 清 ECS 后用国内 DNS 补查；仍无结果则返回空结果
-      - matches:
-        - "qtype 1 28"
-        - "!resp_ip 0.0.0.0/0 ::/0"
-        exec: $no_ecs
-      - matches:
-        - "qtype 1 28"
-        - "!resp_ip 0.0.0.0/0 ::/0"
-        exec: $forward_direct_group
-      - matches:
-        - "qtype 1 28"
-        - "!resp_ip 0.0.0.0/0 ::/0"
+      # 非 A/AAAA：64/65 已在前面拦截；其余类型直接返回带 ECS 的 Cloudflare/Google 结果。
+      - matches: "!qtype 1 28"
         exec: return
 
       # A/AAAA 是 CN IP → 清 ECS 后用国内 DNS 重查，拿更合适的国内 IP
@@ -88,22 +82,13 @@ plugins:
         - "qtype 1 28"
         - "resp_ip $geoip_cn"
         exec: $forward_direct_group
-      - matches:
-        - "qtype 1 28"
-        - "!resp_ip 0.0.0.0/0 ::/0"
-        exec: return
-
       # 国内 DNS 返回 CN IP → 记录并返回真实 IP；若返回海外 IP，继续走 fakeip
       - matches: "resp_ip $geoip_cn"
         exec: query_summary not_in_list_direct
       - matches: "resp_ip $geoip_cn"
         exec: return
 
-      # 非 A/AAAA：直接返回 Cloudflare/Google 真实结果（64/65 已在前面拦截）
-      - matches: "!qtype 1 28"
-        exec: return
-
-      # 剩下的 A/AAAA（海外 IP）→ fakeip
+      # 剩下的 A/AAAA（CF/Google 空结果、海外 IP、或国内 DNS 重查后非 CN）→ fakeip
       - exec: drop_resp
       - exec: $sequence_fakeip
       - matches: "resp_ip $fakeip_cidr"
