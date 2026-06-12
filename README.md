@@ -62,9 +62,32 @@
 ```text
 rule/     # 公共规则（geosite、geoip、通用分流规则）
 my/       # 自定义规则（hosts、黑名单、白名单、灰名单）
-cron/     # 定时任务：00:00 更新 IP 和 site 库，00:15 更新不在名单中的域名分流结果
+cron/     # 定时任务：更新规则、汇总候选域名、自动提升高频候选、延迟重载
 tmp/      # 运行时输出：未命中名单域名的分流日志（not-in-list-direct.txt / not-in-list-proxy.txt）
 ```
+
+## ✅ 手动验证
+
+以下命令以 `10.0.0.1` 为模板 DNS 地址；真实环境替换为实际 mosdns 地址。
+
+- 检查 SVCB/HTTPS 是否被拦截，正常应返回 NODATA / 无 answer：
+  `dig @10.0.0.1 example.com HTTPS +short`
+
+- 检查灰名单 / 公共代理域名是否返回 FakeIP：
+  `dig @10.0.0.1 <grey-or-proxy-domain> A +short`
+
+- 检查白名单 / 公共直连域名是否返回真实 IP：
+  `dig @10.0.0.1 <white-or-direct-domain> A +short`
+
+- 查看未命中名单的自动判定候选：
+  `tail -n 50 tmp/not-in-list-direct.txt`
+  `tail -n 50 tmp/not-in-list-proxy.txt`
+
+- 查看定时任务日志：
+  `tail -n 50 tmp/sync-rules.log`
+  `tail -n 50 tmp/sync-candidates.log`
+  `tail -n 50 tmp/promote-candidates.log`
+  `tail -n 50 tmp/reload.log`
 
 
 ## 📦 依赖项目

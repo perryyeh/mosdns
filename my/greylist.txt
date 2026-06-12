@@ -3,7 +3,6 @@ domain:4d4y.com
 domain:iii80.com
 full:e13252.dscg.akamaiedge.net
 full:h-netflix.online-metrix.net
-full:netflix.com.edgesuite.net
 domain:cookielaw.org
 domain:flxvpn.net
 domain:netflix.com.edgesuite.net
