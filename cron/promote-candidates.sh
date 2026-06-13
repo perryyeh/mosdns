@@ -4,8 +4,8 @@
 
 set -e
 
-CRON_ENV="/etc/mosdns/cron/env"
-[ -f "$CRON_ENV" ] && . "$CRON_ENV"
+CRONENV="/etc/mosdns/cron/cron.env"
+[ -f "$CRONENV" ] && . "$CRONENV"
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"; }
 
@@ -31,7 +31,7 @@ TODAY="$(date +%Y-%m-%d)"
 TODAY_EPOCH="$(date -d "$TODAY" +%s)"
 LOOKBACK_CUTOFF=$((TODAY_EPOCH - (LOOKBACK_DAYS - 1) * 86400))
 RETENTION_CUTOFF=$((TODAY_EPOCH - (RETENTION_DAYS - 1) * 86400))
-TODAY_HEADER="# === $TODAY auto promoted ==="
+TODAY_HEADER="# === $TODAY ==="
 
 cleanup() { rm -rf "$TMPDIR"; }
 trap cleanup EXIT
@@ -102,7 +102,7 @@ promote_one() {
                 printf '%s\n' "$TODAY_HEADER" >> "$target_new"
             fi
         fi
-        awk -v lookback="$LOOKBACK_DAYS" '{ print "domain:" $1 " # count=" $2 " lookback=" lookback "d" }' "$additions" >> "$target_new"
+        awk '{ print "domain:" $1 }' "$additions" >> "$target_new"
         mv -f "$target_new" "$target"
         touch "$RELOAD_MARK"
         log "promoted $(wc -l < "$additions") domains to $target"

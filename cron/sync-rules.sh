@@ -6,8 +6,8 @@
 
 set -e
 
-CRON_ENV="/etc/mosdns/cron/env"
-[ -f "$CRON_ENV" ] && . "$CRON_ENV"
+CRONENV="/etc/mosdns/cron/cron.env"
+[ -f "$CRONENV" ] && . "$CRONENV"
 
 RULES_DIR="/etc/mosdns/rule"
 CONF="/etc/mosdns/cron/sync.conf"

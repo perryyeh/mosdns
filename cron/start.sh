@@ -7,7 +7,7 @@ set -e
 mkdir -p /etc/mosdns/tmp
 
 # Install crontab from mounted volume
-crontab /etc/mosdns/cron/crontab
+crontab /etc/mosdns/cron/crontab.conf
 
 # Start crond in background
 crond -b -l 8

@@ -44,3 +44,6 @@ domain:bingsandbox.com
 domain:bingvisualsearch.com
 domain:bingworld.com
 domain:1password.com
+# === 2026-06-13 ===
+domain:api.ipinfo.es
+domain:tracker.m-team.cc
