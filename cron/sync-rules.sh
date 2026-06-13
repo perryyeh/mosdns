@@ -160,7 +160,7 @@ validate_geoip_set() {
 }
 
 updated=0
-while IFS='|' read -r filename enabled interval url; do
+while IFS='|' read -r filename enabled url; do
     # trim whitespace
     filename=$(echo "$filename" | xargs)
     enabled=$(echo "$enabled" | xargs)
