@@ -30,15 +30,6 @@ fi
 
 DNS_CONF="/etc/mosdns/dns.yaml"
 
-get_proxy_socks5() {
-    [ -f "$DNS_CONF" ] || return 0
-    awk -F'"' '
-        /^[[:space:]]*-[[:space:]]*tag:[[:space:]]*(cloudflare|google)[[:space:]]*$/ { in_proxy = 1; next }
-        /^[[:space:]]*-[[:space:]]*tag:[[:space:]]*/ { in_proxy = 0 }
-        in_proxy && /^[[:space:]]*socks5:[[:space:]]*"/ { print $2; exit }
-    ' "$DNS_CONF"
-}
-
 get_proxy_bootstrap() {
     [ -f "$DNS_CONF" ] || return 0
     bootstrap=$(awk -F'"' '
@@ -56,7 +47,6 @@ get_proxy_bootstrap() {
     awk -F'"' '/^[[:space:]]*- addr:[[:space:]]*"udp:\/\/198\.18\./ { sub(/^udp:\/\//, "", $2); sub(/:.*/, "", $2); print $2; exit }' "$DNS_CONF"
 }
 
-SCRIPT_SOCKS5=$(get_proxy_socks5)
 SCRIPT_BOOTSTRAP=$(get_proxy_bootstrap)
 
 url_host() {
@@ -95,20 +85,7 @@ fetch_url() {
     local f_ip
     f_host=$(url_host "$f_url")
 
-    # Order: socks5 proxy -> bootstrap DNS/fake-ip -> direct.
-    # Current image has BusyBox wget only; socks5 is used when curl is available.
-    if [ -n "$SCRIPT_SOCKS5" ]; then
-        if command -v curl >/dev/null 2>&1; then
-            if curl -fsSL --connect-timeout 20 --max-time 180 --socks5-hostname "$SCRIPT_SOCKS5" -o "$f_dst" "$f_url"; then
-                log "  fetched via socks5 $SCRIPT_SOCKS5"
-                return 0
-            fi
-            log "WARN: socks5 fetch failed, trying bootstrap/direct"
-        else
-            log "WARN: socks5 configured ($SCRIPT_SOCKS5) but curl is not available, trying bootstrap/direct"
-        fi
-    fi
-
+    # Order: bootstrap DNS/fake-ip -> direct. Current image uses wget only.
     if [ -n "$SCRIPT_BOOTSTRAP" ] && [ -n "$f_host" ]; then
         f_ip=$(resolve_with_bootstrap "$f_host" "$SCRIPT_BOOTSTRAP")
         if [ -n "$f_ip" ]; then
