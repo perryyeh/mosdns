@@ -83,16 +83,16 @@ tmp/      # 运行时输出：未命中名单域名的分流日志（not-in-list
 
 ## ✅ 手动验证
 
-以下命令以 `10.0.0.1` 为模板 DNS 地址；真实环境替换为实际 mosdns 地址。
+以下命令以 `10.0.1.119` 为模板 mosdns 地址；真实环境替换为实际 mosdns 地址。
 
 - 检查 SVCB/HTTPS 是否被拦截，正常应返回 NODATA / 无 answer：
-  `dig @10.0.0.1 example.com HTTPS +short`
+  `dig @10.0.1.119 example.com HTTPS +short`
 
 - 检查灰名单 / 公共代理域名是否返回 FakeIP：
-  `dig @10.0.0.1 <grey-or-proxy-domain> A +short`
+  `dig @10.0.1.119 <grey-or-proxy-domain> A +short`
 
 - 检查白名单 / 公共直连域名是否返回真实 IP：
-  `dig @10.0.0.1 <white-or-direct-domain> A +short`
+  `dig @10.0.1.119 <white-or-direct-domain> A +short`
 
 - 查看未命中名单的自动判定候选：
   `tail -n 50 tmp/not-in-list-direct.txt`
