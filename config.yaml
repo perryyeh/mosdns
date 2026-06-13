@@ -99,24 +99,18 @@ plugins:
   - tag: sequence_main
     type: sequence
     args:
-      # 1. geosite_local 交给 local 去解析
-      - matches: qname $geosite_local
-        exec: $local
-      - matches: qname $geosite_local
-        exec: accept
-
-      # 2. geosite_my_hosts 直接读取里面的解析地址
+      # 1. 自定义 hosts：直接读取里面的解析地址，压过所有公共/内置规则
       - exec: $geosite_my_hosts
       - matches: has_resp
         exec: accept
 
-      # 3. 自定义黑名单：最高优先级，压过所有公共规则和自定义白/灰名单
+      # 2. 自定义黑名单：最高优先级，压过 local、公共规则和自定义白/灰名单
       - matches: qname $geosite_my_blacklist
         exec: reject 3
       - matches: qname $geosite_my_blacklist
         exec: return
 
-      # 4. 自定义灰名单：64/65 拦截，A/AAAA 走 fakeip，其他 qtype 走代理真实查询；命中后不降级到后续规则
+      # 3. 自定义灰名单：64/65 拦截，A/AAAA 走 fakeip，其他 qtype 走代理真实查询；命中后不降级到后续规则
       - matches: qname $geosite_my_greylist
         exec: $sequence_proxy_fakeip
       - matches: has_resp
@@ -124,10 +118,16 @@ plugins:
       - matches: qname $geosite_my_greylist
         exec: return
 
-      # 5. 自定义白名单：走 ali 和 tencent，压过公共 proxy
+      # 4. 自定义白名单：走 ali 和 tencent，压过 local 和公共 proxy
       - matches: qname $geosite_my_whitelist
         exec: $forward_direct_group
       - matches: has_resp
+        exec: accept
+
+      # 5. geosite_local 交给 local 去解析，低于 my/* 自定义规则
+      - matches: qname $geosite_local
+        exec: $local
+      - matches: qname $geosite_local
         exec: accept
 
       # 6. 公共 blocklist：直接返回无法解析

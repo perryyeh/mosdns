@@ -16,25 +16,26 @@
 
 整体解析逻辑按以下顺序执行，优先级从高到低：
 
-1. **局域网域名（rule/geosite_local.txt）**
-   - 直接交由路由器解析
-   - 不参与后续分流逻辑
-
-2. **自定义 hosts（my/hosts.txt）**
+1. **自定义 hosts（my/hosts.txt）**
    - 直接返回规则文件中定义的 IP
    - 常用于内网服务、固定地址映射等场景
+   - 压过局域网域名和所有公共规则
 
-3. **自定义黑名单（my/blacklist.txt）**
-   - 最高优先级，压过所有公共规则和自定义白/灰名单
+2. **自定义黑名单（my/blacklist.txt）**
+   - 最高优先级，压过局域网域名、所有公共规则和自定义白/灰名单
    - 直接返回 NXDOMAIN
 
-4. **自定义灰名单（my/greylist.txt）**
-   - 压过自定义白名单里的宽泛规则和公共 direct，命中后不降级到后续规则
+3. **自定义灰名单（my/greylist.txt）**
+   - 压过局域网域名、自定义白名单里的宽泛规则和公共 direct，命中后不降级到后续规则
    - SVCB/HTTPS（qtype 64/65）直接返回 NODATA
    - A 记录走 forward_fakeipv4，AAAA 走 forward_fakeipv6，其他 qtype 返回 Cloudflare / Google 真实结果
 
-5. **自定义白名单（my/whitelist.txt）**
-   - 走 AliDNS / Tencent DNS 直连解析，压过公共 proxy
+4. **自定义白名单（my/whitelist.txt）**
+   - 走 AliDNS / Tencent DNS 直连解析，压过局域网域名和公共 proxy
+
+5. **局域网域名（rule/geosite_local.txt）**
+   - 直接交由路由器解析
+   - 低于 my/* 自定义规则，高于公共规则
 
 6. **公共黑名单（rule/geosite_block.txt）**
    - 直接返回 NXDOMAIN
