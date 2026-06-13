@@ -5,7 +5,7 @@
 - 🇨🇳 国内域名就近解析（AliDNS / Tencent DNS）
 - 🌍 国外域名使用 FakeIP 配合代理
 - 🧠 未明确归类的域名，通过真实 IP 归属自动判定
-- ⚠️ 无缓存，建议配合 adguardhome 使用
+- ⚠️ 力求解析路径和结果准确，mosdns 层不启用缓存；如需缓存建议放在 AdGuardHome 等上游/前置组件
 
 ## ⚙️ 修改注意事项（文件dns.yaml）
 - 10.0.0.1 -> 路由器ip，供查询局域网dns（模板值，真实环境按实际 IP 修改）
@@ -39,6 +39,7 @@
 
 6. **公共黑名单（rule/geosite_block.txt）**
    - 直接返回 NXDOMAIN
+   - 默认不同步公共 reject/block 列表，保持空文件；需要阻断的域名优先写入 `my/blacklist.txt`
 
 7. **公共代理域名（rule/geosite_proxy.txt）**
    - 优先于公共 direct，命中后不降级到后续规则
