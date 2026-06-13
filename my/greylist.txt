@@ -1,10 +1,3 @@
-domain:googleapis.cn
-domain:4d4y.com
-domain:iii80.com
-full:e13252.dscg.akamaiedge.net
-full:h-netflix.online-metrix.net
-domain:cookielaw.org
-domain:flxvpn.net
 domain:netflix.com.edgesuite.net
 domain:netflixdnstest0.com
 domain:netflixdnstest1.com
@@ -26,24 +19,6 @@ domain:nflximg.net
 domain:nflxsearch.net
 domain:nflxso.net
 domain:nflxvideo.net
-domain:onetrust.com
-domain:us-west-2.amazonaws.com
-domain:store.ui.com.cn
-domain:hassbian.com
-domain:copilot.microsoft.com
-domain:prod.rewardsplatform.microsoft.com
-domain:edge.microsoft.com
-domain:nav-edge.smartscreen.microsoft.com
-domain:functional.events.data.microsoft.com
-domain:bing.com.cn
-domain:bing.net
-domain:bingads.com
-domain:bingagencyawards.com
-domain:bingapistatistics.com
-domain:bingsandbox.com
-domain:bingvisualsearch.com
-domain:bingworld.com
-domain:1password.com
 # === 2026-06-13 ===
-domain:api.ipinfo.es
-domain:tracker.m-team.cc
+domain:ipinfo.es
+domain:m-team.cc
