@@ -80,16 +80,32 @@ promote_one() {
 
     awk -v threshold="$threshold" -v targetfile="$target" '
         function trim(s) { gsub(/^[ \t]+|[ \t]+$/, "", s); return s }
+        function covered_by_domain_rule(d, x) {
+            x=d
+            while (x != "") {
+                if (x in domain_exists) return 1
+                if (index(x, ".") == 0) break
+                sub(/^[^.]+\./, "", x)
+            }
+            return 0
+        }
         BEGIN {
             while ((getline line < targetfile) > 0) {
-                s=line; sub(/#.*/, "", s); s=trim(s); sub(/^domain:/, "", s); sub(/^full:/, "", s)
-                if (s != "") exists[s]=1
+                s=line; sub(/#.*/, "", s); s=trim(s)
+                if (s == "") continue
+                if (s ~ /^full:/) {
+                    sub(/^full:/, "", s)
+                    if (s != "") full_exists[s]=1
+                } else {
+                    sub(/^domain:/, "", s)
+                    if (s != "") domain_exists[s]=1
+                }
             }
             close(targetfile)
         }
         {
             d=$1; c=$2 + 0
-            if (c >= threshold && !(d in exists)) print d "\t" c
+            if (c >= threshold && !(d in full_exists) && !covered_by_domain_rule(d)) print d "\t" c
         }
     ' "$counts" > "$additions"
 
