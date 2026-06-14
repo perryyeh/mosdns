@@ -1,5 +1,5 @@
 log:
-  level: info
+  level: warn
   file: "/dev/shm/mosdns.log"
 
 api:

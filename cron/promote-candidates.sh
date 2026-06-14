@@ -144,3 +144,12 @@ promote_one() {
 
 promote_one "$DIRECT_CANDIDATES" "$WHITELIST" "$DIRECT_THRESHOLD" "direct"
 promote_one "$PROXY_CANDIDATES" "$GREYLIST" "$PROXY_THRESHOLD" "proxy"
+
+report_my_lists() {
+    whitelist_count=$(sed -n 's/#.*//; /^[[:space:]]*$/d; p' "$WHITELIST" | wc -l | tr -d ' ')
+    greylist_count=$(sed -n 's/#.*//; /^[[:space:]]*$/d; p' "$GREYLIST" | wc -l | tr -d ' ')
+    log "my whitelist domains: $whitelist_count ($WHITELIST)"
+    log "my greylist domains: $greylist_count ($GREYLIST)"
+}
+
+report_my_lists
