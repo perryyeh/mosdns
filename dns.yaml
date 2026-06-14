@@ -30,7 +30,7 @@ plugins:
           # dial_addr: "8.8.8.8" # 8.8.4.4 2001:4860:4860::8888 2001:4860:4860::8844
           # socks5: "10.0.0.120:6153"  #修改点，改为自己的代理
           bootstrap: "198.18.0.2" #修改点，改为域名解析服务器
-        - addr: "tls://dns.google:853"
+        - addr: "tls://dns.google"
           # dial_addr: "8.8.8.8"
           # socks5: "10.0.0.120:6153"
           bootstrap: "198.18.0.2" 
@@ -46,7 +46,7 @@ plugins:
           # dial_addr: "1.1.1.1" # 1.0.0.1 2606:4700:4700::1111 2606:4700:4700::1001
           # socks5: "10.0.0.120:6153"
           bootstrap: "198.18.0.2"
-        - addr: "tls://cloudflare-dns.com:853"
+        - addr: "tls://cloudflare-dns.com"
           # dial_addr: "1.1.1.1"
           # socks5: "10.0.0.120:6153"
           bootstrap: "198.18.0.2"
@@ -71,9 +71,9 @@ plugins:
       concurrent: 1
       upstreams:
         - addr: "https://doh.pub/dns-query"
-          bootstrap: "119.29.29.29"
-        - addr: "tls://dot.pub:853"
-          bootstrap: "119.29.29.29"
+          bootstrap: "1.12.12.12"
+        - addr: "tls://dot.pub"
+          bootstrap: "120.53.53.53"
           enable_pipeline: true
 
   # local dns
