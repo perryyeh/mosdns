@@ -22,3 +22,14 @@ domain:nflxvideo.net
 # === 2026-06-13 ===
 domain:ipinfo.es
 domain:m-team.cc
+# === 2026-06-14 ===
+domain:v2ex.co
+domain:v2ex.pro
+domain:obsidian.md
+domain:bang-olufsen.com
+# === 2026-06-15 ===
+domain:raycast.com
+domain:aws.found.io
+domain:giscus.app
+domain:splunkcloud.com
+domain:wsimg.com
