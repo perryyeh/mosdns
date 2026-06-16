@@ -15,8 +15,8 @@ domain:sfx.ms
 domain:nn.ci
 domain:ntp.org
 domain:qlogo.cn
-domain:dht.libtorrent.org
-domain:dht.transmissionbt.com
+domain:libtorrent.org
+domain:transmissionbt.com
 domain:xiuxitong.com
 domain:tawk.to
 domain:akadns.net
@@ -35,3 +35,6 @@ domain:cdn-apple.com
 domain:aaplimg.com
 domain:icloud.com
 domain:icloud-content.com
+# === 2026-06-14 ===
+domain:flyertrip.com
+domain:ctripgslb.net

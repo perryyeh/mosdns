@@ -20,16 +20,30 @@ domain:nflxsearch.net
 domain:nflxso.net
 domain:nflxvideo.net
 # === 2026-06-13 ===
-domain:ipinfo.es
+domain:armbian.com
+domain:iterm2.com
+domain:obsidian.md
+domain:raycast.com
+domain:raycast-releases.com
+domain:immich.cloud
 domain:m-team.cc
 # === 2026-06-14 ===
+domain:ipinfo.es
+domain:ipinfo.io
+domain:ip-api.com
 domain:v2ex.co
 domain:v2ex.pro
-domain:obsidian.md
-domain:bang-olufsen.com
 # === 2026-06-15 ===
-domain:raycast.com
-domain:aws.found.io
 domain:giscus.app
-domain:splunkcloud.com
+domain:openwebmp.com
+domain:aws.found.io
 domain:wsimg.com
+domain:wiz.money
+domain:nssurge.com
+domain:splunkcloud.com
+# === 2026-06-16 ===
+domain:starlink.com
+domain:supermicro.com
+domain:beo.com
+domain:bang-olufsen.com
+domain:kickstarter.com
