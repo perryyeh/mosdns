@@ -4,13 +4,8 @@
 
 set -e
 
-CRONENV="/etc/mosdns/cron/cron.env"
+CRONENV="${CRONENV:-/etc/mosdns/cron/cron.env}"
 [ -f "$CRONENV" ] && . "$CRONENV"
-
-if [ "${MOSDNS_SYNC_CANDIDATES_ENABLED:-1}" != "1" ]; then
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] sync candidates disabled"
-    exit 0
-fi
 
 LOG_FILE="${LOG_FILE:-/dev/shm/mosdns.log}"
 OUT_DIR="${OUT_DIR:-/etc/mosdns/tmp}"
@@ -19,6 +14,16 @@ PROXY_OUT="$OUT_DIR/not-in-list-proxy.txt"
 TMPDIR="/tmp/mosdns-not-in-list.$$"
 TODAY="$(date +%Y-%m-%d)"
 TODAY_HEADER="# === $TODAY ==="
+
+if [ "${MOSDNS_SYNC_CANDIDATES_ENABLED:-1}" != "1" ]; then
+    mkdir -p "$OUT_DIR"
+    DISABLED_MARKER="$OUT_DIR/.sync-candidates-disabled-$TODAY"
+    if [ ! -e "$DISABLED_MARKER" ]; then
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] sync candidates disabled"
+        : > "$DISABLED_MARKER"
+    fi
+    exit 0
+fi
 
 cleanup() { rm -rf "$TMPDIR"; }
 trap cleanup EXIT
@@ -43,6 +48,8 @@ extract_kind() {
     else
         : > "$new"
     fi
+
+    awk -F '\t' '{hits += $2} END {print NR " " hits + 0}' "$new" > "$TMPDIR/$kind.stats"
 
     awk -v header="$TODAY_HEADER" -v newfile="$new" '
         function trim(s) { gsub(/^[ \t]+|[ \t]+$/, "", s); return s }
@@ -130,6 +137,10 @@ extract_kind() {
 
 extract_kind "not_in_list_direct" "$DIRECT_OUT"
 extract_kind "not_in_list_fake" "$PROXY_OUT"
+
+read direct_domains direct_hits < "$TMPDIR/not_in_list_direct.stats"
+read proxy_domains proxy_hits < "$TMPDIR/not_in_list_fake.stats"
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] sync candidates updated direct_domains=${direct_domains:-0} direct_hits=${direct_hits:-0} proxy_domains=${proxy_domains:-0} proxy_hits=${proxy_hits:-0}"
 
 # Keep high-volume raw log in memory only; clear after extraction.
 : > "$LOG_FILE"
