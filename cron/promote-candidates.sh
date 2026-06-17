@@ -89,6 +89,14 @@ promote_one() {
             }
             return 0
         }
+        function covered_by_batch_parent(d, x) {
+            x=d
+            while (index(x, ".") > 0) {
+                sub(/^[^.]+\./, "", x)
+                if (x in batch_domain) return 1
+            }
+            return 0
+        }
         BEGIN {
             while ((getline line < targetfile) > 0) {
                 s=line; sub(/#.*/, "", s); s=trim(s)
@@ -105,7 +113,17 @@ promote_one() {
         }
         {
             d=$1; c=$2 + 0
-            if (c >= threshold && !(d in full_exists) && !covered_by_domain_rule(d)) print d "\t" c
+            if (c >= threshold && !(d in full_exists) && !covered_by_domain_rule(d)) {
+                order[++n]=d
+                batch_domain[d]=1
+                batch_count[d]=c
+            }
+        }
+        END {
+            for (i=1; i<=n; i++) {
+                d=order[i]
+                if (!covered_by_batch_parent(d)) print d "\t" batch_count[d]
+            }
         }
     ' "$counts" > "$additions"
 
