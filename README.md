@@ -60,6 +60,34 @@
      - **不属于 CN**：走 FakeIP 逻辑，并记录到 tmp/not-in-list-proxy.txt
 
 
+## 🧩 设计边界
+
+- mosdns 负责域名分流、真实解析分类和 FakeIP 返回。
+- mosdns 层默认不做缓存；缓存应放在 AdGuard Home 等前置/上游组件。
+- mosdns 层默认不维护大规模 blocklist；拦截类需求优先放在 AdGuard Home，或显式开启/维护本仓库对应规则。
+- QUIC/UDP 443、WebRTC/STUN/TURN 泄漏不是 DNS 层能单独解决的问题，应由 Surge/mihomo/浏览器/路由策略处理。
+
+## 🗂️ 自定义规则维护约定
+
+- `my/greylist.txt` 和 `my/whitelist.txt` 由使用者手动维护。
+- 自动提升只写日期块和 `domain:<qname>`，不写 count/lookback，也不自动合并到父域名。
+- `greylist` / `proxylist` 命中后不得 fall through 到后续规则。
+- 编辑运行中环境前，先读取目标环境最新规则文件；不要依赖旧缓存或历史对话。
+
+## 🧪 mosdns v5.3.4 注意事项
+
+- `env KEY value` matcher 不可靠；需要检查环境变量是否存在时使用 `env KEY`。
+- 不要用 `lazy_cache_ttl` 做 not-in-list 收集，因为它会改变缓存响应语义。
+- 实时 dump 使用 API：`/plugins/<tag>/dump`。
+- `dump_file` 通常在重启/退出时写入。
+
+## 🧫 临时测试约定
+
+- 临时 A/B 测试避免占用正式容器名、正式 IP 和正式端口。
+- 使用唯一临时容器名和高位端口。
+- 不占用正式 macvlan IP 或 53 端口。
+- 测试结束后清理临时容器和资源。
+
 ## 📖 目录结构
 
 ```text
