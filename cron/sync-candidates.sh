@@ -16,7 +16,10 @@ TODAY="$(date +%Y-%m-%d)"
 TODAY_HEADER="# === $TODAY ==="
 
 if [ "${MOSDNS_SYNC_CANDIDATES_ENABLED:-1}" != "1" ]; then
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] sync candidates disabled"
+    DISABLED_LOG="$OUT_DIR/sync-candidates-$TODAY.log"
+    if ! grep -Fq "sync candidates disabled" "$DISABLED_LOG" 2>/dev/null; then
+        echo "[$(date '+%Y-%m-%d %H:%M:%S')] sync candidates disabled"
+    fi
     exit 0
 fi
 
