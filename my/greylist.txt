@@ -19,6 +19,7 @@ domain:nflximg.net
 domain:nflxsearch.net
 domain:nflxso.net
 domain:nflxvideo.net
+
 # === 2026-06-13 ===
 domain:armbian.com
 domain:iterm2.com
@@ -26,24 +27,61 @@ domain:obsidian.md
 domain:raycast.com
 domain:raycast-releases.com
 domain:immich.cloud
+domain:movie-pilot.org
 domain:m-team.cc
+domain:m-team.io
+
 # === 2026-06-14 ===
 domain:ipinfo.es
 domain:ipinfo.io
 domain:ip-api.com
 domain:v2ex.co
 domain:v2ex.pro
+domain:nousresearch.com
+domain:pi.dev
+
 # === 2026-06-15 ===
 domain:giscus.app
 domain:openwebmp.com
 domain:aws.found.io
 domain:wsimg.com
 domain:wiz.money
+domain:skk.moe
 domain:nssurge.com
-domain:splunkcloud.com
+domain:surge-activation.com
+
 # === 2026-06-16 ===
 domain:starlink.com
 domain:supermicro.com
 domain:beo.com
 domain:bang-olufsen.com
 domain:kickstarter.com
+
+# === 2026-06-17 ===
+domain:tavily.com
+domain:yylx.io
+
+# === 2026-06-18 ===
+domain:airwallex.com
+domain:revenuecat.com
+domain:splunkcloud.com
+domain:dolbyaccess.data.dolby.com
+
+# === 2026-06-19 ===
+domain:openexchangerates.org
+
+# === 2026-06-20 ===
+domain:mole.fit
+
+# === 2026-06-22 ===
+domain:ulog.dhgames.com
+domain:hk-turn1.xirsys.com
+domain:lscr.io
+domain:mon-bd-johor.byteintlapi.com
+domain:sf-rc.yhgfb-static.com
+domain:vcs.rmc.byteplusbiz.com
+
+# === 2026-06-23 ===
+domain:prearrival.immigration.gov.vn
+domain:uptime.kuma.pet
+domain:aramco.com

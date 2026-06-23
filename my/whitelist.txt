@@ -24,11 +24,15 @@ domain:validate.perfdrive.com
 domain:arcot.com
 domain:visa.vfsglobal.com
 # === 2026-06-06 ===
+domain:hsbc.com
+domain:hsbc.com.cn
+domain:hsbc.com.hk
+domain:boc.cn
+domain:cgbchina.com
+# === 2026-06-08 ===
 domain:bdcgslb.com
 domain:oyunfor.com
 domain:amazon.cn
-domain:boc.cn
-domain:cgbchina.com
 domain:apple.cn
 domain:apple.com.cn
 domain:cdn-apple.com
@@ -38,3 +42,5 @@ domain:icloud-content.com
 # === 2026-06-14 ===
 domain:flyertrip.com
 domain:ctripgslb.net
+domain:tripcdn.com
+domain:epsonconnect.com
