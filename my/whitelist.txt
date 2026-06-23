@@ -1,27 +1,19 @@
 domain:ident.me
 domain:ipw.cn
 domain:edu.cn
-domain:mbjlkg.lol
-domain:huacloud.xyz
-domain:rfp4ucx.xyz
 domain:nexconvert.com
-domain:heartbeat.belkin.com
 domain:msftconnecttest.com
 domain:msedge.com
 domain:msedge.net
 domain:azurefd.com
-domain:default.exp-tas.com
+domain:exp-tas.com
 domain:sfx.ms
 domain:nn.ci
 domain:ntp.org
 domain:qlogo.cn
 domain:libtorrent.org
 domain:transmissionbt.com
-domain:xiuxitong.com
-domain:tawk.to
 domain:akadns.net
-domain:validate.perfdrive.com
-domain:arcot.com
 domain:visa.vfsglobal.com
 # === 2026-06-06 ===
 domain:hsbc.com
@@ -30,8 +22,6 @@ domain:hsbc.com.hk
 domain:boc.cn
 domain:cgbchina.com
 # === 2026-06-08 ===
-domain:bdcgslb.com
-domain:oyunfor.com
 domain:amazon.cn
 domain:apple.cn
 domain:apple.com.cn
@@ -39,9 +29,10 @@ domain:cdn-apple.com
 domain:aaplimg.com
 domain:icloud.com
 domain:icloud-content.com
+domain:bdcgslb.com
 # === 2026-06-14 ===
-domain:ctripgslb.net
 domain:trip.com
 domain:tripcdn.com
+domain:ctripgslb.net
 domain:epsonconnect.com
 domain:flyertrip.com
