@@ -65,7 +65,7 @@ domain:yylx.io
 domain:airwallex.com
 domain:revenuecat.com
 domain:splunkcloud.com
-domain:dolbyaccess.data.dolby.com
+domain:dolby.com
 
 # === 2026-06-19 ===
 domain:openexchangerates.org
@@ -74,14 +74,13 @@ domain:openexchangerates.org
 domain:mole.fit
 
 # === 2026-06-22 ===
-domain:ulog.dhgames.com
 domain:hk-turn1.xirsys.com
 domain:lscr.io
-domain:mon-bd-johor.byteintlapi.com
-domain:sf-rc.yhgfb-static.com
-domain:vcs.rmc.byteplusbiz.com
+domain:byteintlapi.com
+domain:byteplusbiz.com
+domain:yhgfb-static.com
 
 # === 2026-06-23 ===
-domain:prearrival.immigration.gov.vn
-domain:uptime.kuma.pet
+domain:gov.vn
+domain:kuma.pet
 domain:aramco.com

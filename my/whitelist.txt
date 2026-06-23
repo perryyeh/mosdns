@@ -40,7 +40,8 @@ domain:aaplimg.com
 domain:icloud.com
 domain:icloud-content.com
 # === 2026-06-14 ===
-domain:flyertrip.com
 domain:ctripgslb.net
+domain:trip.com
 domain:tripcdn.com
 domain:epsonconnect.com
+domain:flyertrip.com
