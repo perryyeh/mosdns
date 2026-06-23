@@ -16,12 +16,7 @@ TODAY="$(date +%Y-%m-%d)"
 TODAY_HEADER="# === $TODAY ==="
 
 if [ "${MOSDNS_SYNC_CANDIDATES_ENABLED:-1}" != "1" ]; then
-    mkdir -p "$OUT_DIR"
-    DISABLED_MARKER="$OUT_DIR/.sync-candidates-disabled-$TODAY"
-    if [ ! -e "$DISABLED_MARKER" ]; then
-        echo "[$(date '+%Y-%m-%d %H:%M:%S')] sync candidates disabled"
-        : > "$DISABLED_MARKER"
-    fi
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] sync candidates disabled"
     exit 0
 fi
 
