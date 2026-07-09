@@ -15,12 +15,17 @@ domain:libtorrent.org
 domain:transmissionbt.com
 domain:akadns.net
 domain:visa.vfsglobal.com
+
 # === 2026-06-06 ===
+domain:yezi.org
+
+# === 2026-06-07 ===
 domain:hsbc.com
 domain:hsbc.com.cn
 domain:hsbc.com.hk
 domain:boc.cn
 domain:cgbchina.com
+
 # === 2026-06-08 ===
 domain:amazon.cn
 domain:apple.cn
@@ -30,6 +35,7 @@ domain:aaplimg.com
 domain:icloud.com
 domain:icloud-content.com
 domain:bdcgslb.com
+
 # === 2026-06-14 ===
 domain:trip.com
 domain:tripcdn.com

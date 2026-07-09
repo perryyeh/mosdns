@@ -20,6 +20,11 @@ domain:nflxsearch.net
 domain:nflxso.net
 domain:nflxvideo.net
 
+# === 2026-06-06 ===
+domain:yeh.sh
+domain:inyue.com
+domain:passid.org
+
 # === 2026-06-13 ===
 domain:armbian.com
 domain:iterm2.com
@@ -84,3 +89,20 @@ domain:yhgfb-static.com
 domain:gov.vn
 domain:kuma.pet
 domain:aramco.com
+
+# === 2026-06-25 ===
+domain:zuoluo.tv
+
+# === 2026-06-28 ===
+domain:api.homerunsmart.com
+domain:ulog.dhgames.com
+
+# === 2026-07-03 ===
+domain:consumer.cloud.gist.build
+domain:opaddin.example
+
+# === 2026-07-05 ===
+domain:itcs-lab.com
+
+# === 2026-07-06 ===
+domain:cottonplatform.bettercotton.org
