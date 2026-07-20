@@ -106,3 +106,28 @@ domain:itcs-lab.com
 
 # === 2026-07-06 ===
 domain:cottonplatform.bettercotton.org
+
+# === 2026-07-10 ===
+domain:cdn.datatables.net
+domain:os.idfl.com
+domain:us.i.posthog.com
+
+# === 2026-07-11 ===
+domain:7fc280bc.datadoghq.com
+domain:us5.datadoghq.com
+
+# === 2026-07-12 ===
+domain:swxfrieren.com2us.com
+
+# === 2026-07-13 ===
+domain:events.salesmartly.com
+domain:msg.salesmartly.com
+domain:srz.salesmartly.com
+
+# === 2026-07-14 ===
+domain:api.salesmartly.com
+domain:apichatwidget.usepylon.com
+domain:www.firecrawl.dev
+
+# === 2026-07-16 ===
+domain:mail.abacus-textile.com

@@ -21,12 +21,18 @@ domain:yezi.org
 
 # === 2026-06-07 ===
 domain:hsbc.com
-domain:hsbc.com.cn
+domain:hsbc.co.uk
+domain:hsbc.com.mx
 domain:hsbc.com.hk
-domain:boc.cn
-domain:cgbchina.com
+domain:hsbc.com.cn
+domain:online-metrix.net
+domain:medallia.com
+domain:awswaf.com
+domain:vv1865.com
 
 # === 2026-06-08 ===
+domain:boc.cn
+domain:cgbchina.com
 domain:amazon.cn
 domain:apple.cn
 domain:apple.com.cn
