@@ -147,14 +147,23 @@ promote_one() {
     if [ "$RETENTION_DAYS" -gt 0 ] 2>/dev/null; then
         awk -v cutoff="$RETENTION_CUTOFF" '
             function epoch(d, a) { split(d, a, "-"); return mktime(a[1] " " a[2] " " a[3] " 00 00 00") }
+            function emit(line) {
+                if (line ~ /^[[:space:]]*$/) {
+                    if (!last_blank) print ""
+                    last_blank=1
+                } else {
+                    print line
+                    last_blank=0
+                }
+            }
             /^# === [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/ {
                 date=substr($3, 1, 10)
                 keep=(epoch(date) >= cutoff)
-                if (keep && printed) print ""
-                if (keep) { print; printed=1 }
+                if (keep && printed) emit("")
+                if (keep) { emit($0); printed=1 }
                 next
             }
-            { if (keep) print }
+            { if (keep) emit($0) }
         ' "$candidates" > "$cand_new"
         mv -f "$cand_new" "$candidates"
     fi
