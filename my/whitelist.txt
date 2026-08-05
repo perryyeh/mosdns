@@ -49,3 +49,7 @@ domain:tripcdn.com
 domain:ctripgslb.net
 domain:epsonconnect.com
 domain:flyertrip.com
+
+# === 2026-08-04 ===
+domain:iot.cuktech.net
+domain:itcs-lab.com

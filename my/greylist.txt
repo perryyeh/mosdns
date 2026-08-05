@@ -103,9 +103,6 @@ domain:ulog.dhgames.com
 # === 2026-07-03 ===
 domain:opaddin.example
 
-# === 2026-07-05 ===
-domain:itcs-lab.com
-
 # === 2026-07-06 ===
 domain:cottonplatform.bettercotton.org
 
@@ -120,3 +117,25 @@ domain:datadoghq.com
 # === 2026-07-27 ===
 domain:aiot-mqtt-us.anker.com
 domain:ankerpower-api.anker.com
+
+# === 2026-07-28 ===
+domain:aa015h6buqvih86i1.api.met.no
+domain:de1.api.radio-browser.info
+
+# === 2026-07-30 ===
+domain:aefd.nelreports.net
+
+# === 2026-07-31 ===
+domain:stun.ekiga.net
+domain:stun.ideasip.com
+domain:stun.rixtelecom.se
+domain:stun.schlund.de
+domain:stun.stunprotocol.org
+domain:stun.voiparound.com
+domain:stun.voipbuster.com
+domain:stun.voipstunt.com
+
+# === 2026-08-01 ===
+domain:api.rc-backup.com
+domain:epg.aptv.app
+domain:www.mojeek.com
