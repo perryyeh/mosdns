@@ -51,5 +51,8 @@ domain:epsonconnect.com
 domain:flyertrip.com
 
 # === 2026-08-04 ===
-domain:iot.cuktech.net
+domain:cuktech.net
 domain:itcs-lab.com
+
+# === 2026-08-07 ===
+domain:epg.51zmt.top
