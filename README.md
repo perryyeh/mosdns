@@ -11,7 +11,7 @@
 
 ## ⚙️ 修改注意事项（文件dns.yaml）
 - 10.0.0.1 -> 路由器ip，供查询局域网dns（模板值，真实环境按实际 IP 修改）
-- 198.18.0.2 / fd00:6152::2 -> fake ip的dns，供查询外部站点dns。surge写198.18.0.2 / fd00:6152::2；mihomo写IP
+- 198.18.0.2 / 2001:2:0:6152::2 -> fake ip的dns，供查询外部站点dns。Surge 当前 IPv6 Fake-IP 返回段为 2001:2:0:6152:0:9::/96；mihomo写IP
 - Google / Cloudflare 上游：Surge 场景用 socks5 走代理，mihomo 场景用 bootstrap
 
 ## 🚀 解析流程说明

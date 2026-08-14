@@ -98,7 +98,7 @@ plugins:
     args:
       concurrent: 1
       upstreams:
-        - addr: "udp://[fd00:6152::2]:53"
+        - addr: "udp://[2001:2:0:6152::2]:53"
 
   # fakeip 地址段，用于匹配 fakeip 返回结果
   - tag: fakeip_cidr
@@ -106,4 +106,4 @@ plugins:
     args:
       ips:
         - "198.18.0.0/15"
-        - "fd00:6152:0:9::/64"
+        - "2001:2:0:6152:0:9::/96"
