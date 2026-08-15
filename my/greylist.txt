@@ -21,6 +21,8 @@ domain:nflxso.net
 domain:nflxvideo.net
 
 # === 2026-06-06 ===
+domain:giscus.app
+domain:gist.build
 domain:yeh.sh
 domain:inyue.com
 domain:passid.org
@@ -46,7 +48,6 @@ domain:nousresearch.com
 domain:pi.dev
 
 # === 2026-06-15 ===
-domain:giscus.app
 domain:openwebmp.com
 domain:aws.found.io
 domain:wsimg.com
@@ -61,9 +62,14 @@ domain:supermicro.com
 domain:beo.com
 domain:bang-olufsen.com
 domain:kickstarter.com
+domain:ui.com
+domain:ubnt.com
+domain:home-assistant.io
 
 # === 2026-06-17 ===
+domain:firecrawl.dev
 domain:tavily.com
+domain:models.dev
 domain:yylx.io
 
 # === 2026-06-18 ===
@@ -78,72 +84,42 @@ domain:openexchangerates.org
 # === 2026-06-20 ===
 domain:mole.fit
 
-# === 2026-06-22 ===
-domain:hk-turn1.xirsys.com
-domain:lscr.io
-domain:byteintlapi.com
-domain:byteplusbiz.com
-domain:yhgfb-static.com
-
 # === 2026-06-23 ===
 domain:gov.vn
 domain:kuma.pet
 domain:aramco.com
 
-# === 2026-06-25 ===
-domain:gist.build
-domain:firecrawl.dev
-domain:home-assistant.io
-
 # === 2026-06-28 ===
 domain:zuoluo.tv
-domain:api.homerunsmart.com
-domain:ulog.dhgames.com
+domain:homerunsmart.com
+domain:dhgames.com
 
 # === 2026-07-03 ===
 domain:opaddin.example
 
 # === 2026-07-06 ===
-domain:cottonplatform.bettercotton.org
+domain:bettercotton.org
 
 # === 2026-07-10 ===
 domain:cdn.datatables.net
 domain:os.idfl.com
-domain:us.i.posthog.com
+domain:posthog.com
 
 # === 2026-07-11 ===
 domain:datadoghq.com
 
-# === 2026-07-27 ===
-domain:aiot-mqtt-us.anker.com
-domain:ankerpower-api.anker.com
-
 # === 2026-07-28 ===
-domain:aa015h6buqvih86i1.api.met.no
-domain:de1.api.radio-browser.info
-
-# === 2026-07-30 ===
-domain:aefd.nelreports.net
-
-# === 2026-07-31 ===
-domain:stun.ekiga.net
-domain:stun.ideasip.com
-domain:stun.rixtelecom.se
-domain:stun.schlund.de
-domain:stun.stunprotocol.org
-domain:stun.voiparound.com
-domain:stun.voipbuster.com
-domain:stun.voipstunt.com
+domain:met.no
+domain:radio-browser.info
 
 # === 2026-08-01 ===
-domain:api.rc-backup.com
+domain:rc-backup.com
 domain:epg.aptv.app
-domain:www.mojeek.com
+domain:mojeek.com
 
 # === 2026-08-06 ===
 domain:igmp.vip
-domain:iptv.707626.xyz
-domain:models.dev
+domain:707626.xyz
 
 # === 2026-08-07 ===
 domain:epg.112114.xyz
