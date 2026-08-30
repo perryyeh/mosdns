@@ -413,6 +413,7 @@
 59mvmv.com
 5axis-machining.com
 5beatsbydre.com
+5ch.io
 5ch.net
 5fang.cc
 5i01.com
@@ -771,6 +772,7 @@ adguard.info
 adguard.io
 adguard.org
 adguardaccount.com
+adguardaccount.net
 adguardcdn.com
 adguardvpn.com
 adhelpnews.com
@@ -1612,6 +1614,7 @@ amazontrust.com
 amazonvideo.cc
 amazonvideo.com
 amazonvideodirect.com
+amazonwebservices.com
 amazonworkdocs.com
 amc.com
 amcn.com
@@ -1800,6 +1803,7 @@ aoc.cat
 aodahl.com
 aofriend.com
 aokwholesale.net
+aolcdn.com
 aomedia.org
 aomiwang.com
 aorus.com
@@ -1820,6 +1824,7 @@ api.ai
 api.moomoobull.com
 api.news
 api.palworldgame.com
+api.shuaiapi.com
 apiary.io
 apiauto.ru
 apibay.org
@@ -4482,6 +4487,7 @@ brew.sh
 brewmp.com
 briantreepayments.net
 briantreepayments.tv
+briarproject.org
 bridge-studio.co.uk
 bridgebim.com
 bridgestone
@@ -7118,6 +7124,7 @@ drdreprobeatssale.com
 dreamamateurs.com
 dreambmw.ca
 dreamforce.com
+dreamgen.com
 dreammovies.com
 dreamorder.com
 dreamteamfc.com
@@ -8510,6 +8517,7 @@ fans-here.com
 fans17.com
 fans66.tw
 fansking.tw
+fansly.com
 fansnudes.com
 fansone.co
 fanspot.jp
@@ -10624,6 +10632,7 @@ h-top.supertop-100.com
 h-webtoon.com
 h0930.com
 h18ani1.vip
+h264.io
 h2o.ai
 h2porn.com
 h528.com
@@ -11123,6 +11132,7 @@ hiporn.net
 hippyhillscomix.com
 hipzoom.net
 hiroshimabank.co.jp
+historylines.net
 historyofdota.com
 historyofdota.net
 historyofdota.org
@@ -13569,6 +13579,7 @@ killercb.ru
 killwall.com
 kilmeadeandfriends.com
 kimchi.tv
+kimi.ai
 kimogirl.cc
 kimosex.com
 kindgirls.com
@@ -13638,6 +13649,7 @@ kitakyushubank.co.jp
 kiwi.jp
 kiwi.kz
 kiwibrowser.com
+kiwix.org
 kiyobank.co.jp
 kk-whys.co.jp
 kk.stream
@@ -14759,6 +14771,7 @@ mcdonalds.se
 mcdonaldsapps.com
 mcdonaldsarabia.com
 mcdonaldsparties.co.nz
+mceindex.com
 mcisco.com
 mcpeaceofmind.com
 mcrouter.net
@@ -15665,6 +15678,7 @@ moomootrustee.com
 moon.fm
 moonbbs.com
 moonbingo.com
+moonshot.ai
 moov.hk
 moozporn.com
 moptt.tw
@@ -16484,6 +16498,7 @@ nftstatic.com
 nftstorage.link
 nga.mil
 ngeo.com
+ngfiles.com
 nginx.com
 nginx.org
 nginxconfig.io
@@ -16525,6 +16540,8 @@ nichost.ru
 nickscipio.com
 nicky.xxx
 nico
+nico.ms
+nicochannel.jp
 nicodic.jp
 nicolepeters.com
 nicomanga.jp
@@ -16804,6 +16821,7 @@ nonlinearnastran.com
 nonstopfap.com
 noodlemagazine.com
 noosferabank.ru
+nordcdn.com
 nordstrom.com
 nordstromimage.com
 nordstrommedia.com
@@ -16812,6 +16830,7 @@ nordvpn.com
 norsk.mobi
 norton.com
 nos.nl
+notegpt.io
 notepad-plus-plus.org
 noticias-rt.com
 notimundo.press
@@ -16823,6 +16842,7 @@ notion.site
 notion.so
 notionusercontent.com
 nottinghampost.com
+novelai.net
 noveltrove.com
 novids.com
 novinhabucetuda.com
@@ -17213,6 +17233,7 @@ older-women-porn.com
 older.tube
 oldhornymilfs.com
 oldje.com
+oldmapsonline.org
 olehd.com
 olehdtv.com
 olelive.com
@@ -17482,6 +17503,7 @@ ourshdtv.com
 ourshemales.com
 oursteps.com.au
 ourtv.hk
+ouryahoo.com
 out-app-purchase.com
 outbound.io
 outdoorpublicsex.com
@@ -19409,6 +19431,7 @@ reiporno.com
 relateiq.com
 religionnews.com
 remirepo.net
+remna.st
 rencapbank.ru
 renchead.com
 rencredit.ru
@@ -19749,6 +19772,7 @@ rutracker.me
 rutracker.net
 rutracker.nl
 rutracker.org
+rutracker.wiki
 rutrk.org
 rutube.ru
 rutube.sport
@@ -21731,6 +21755,7 @@ takporn.com
 talantix.ru
 talentlens.com
 taleofthenight.com
+talkai.info
 talkatone.com
 talkboxapp.com
 talkcc.com
@@ -24744,6 +24769,7 @@ wpmailsmtp.com
 wpoforum.com
 wpvip.com
 wrenchead.com
+write.as
 writesonic.com
 ws-blau.com
 ws-tcg.com
@@ -24857,6 +24883,7 @@ x18r.com
 x3guide.com
 x3vid.com
 x6av.com
+x86.fr
 x99av.com
 xamarin.com
 xandr.com
@@ -25602,6 +25629,7 @@ yahooapis.com
 yahoodns.net
 yahoofinance.com
 yahoohealth.com
+yahooinc.com
 yahoomusic.com
 yahoosandbox.com
 yahoosportsbook.com

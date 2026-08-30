@@ -129,3 +129,29 @@ domain:ift.px-cloud.net
 
 # === 2026-08-11 ===
 domain:salesmartly.com
+
+# === 2026-08-16 ===
+domain:aiot-mqtt-us.anker.com
+domain:ankerpower-api.anker.com
+
+# === 2026-08-18 ===
+domain:rollout.ada.support
+
+# === 2026-08-19 ===
+domain:community.royalapps.com
+domain:static.ada.support
+
+# === 2026-08-21 ===
+domain:stun.voipstunt.com
+
+# === 2026-08-22 ===
+domain:lscr.io
+domain:tapi.s132.com
+
+# === 2026-08-23 ===
+domain:mcp.exa.ai
+
+# === 2026-08-28 ===
+domain:access.if.iq.com
+domain:cache-video.iq.com
+domain:s.102031.xyz
