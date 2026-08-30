@@ -1,4 +1,5 @@
 domain:api.cloudflare.com
+domain:api.ipify.org
 domain:ident.me
 domain:ipw.cn
 domain:edu.cn
@@ -13,13 +14,11 @@ domain:nn.ci
 domain:ntp.org
 domain:qlogo.cn
 domain:libtorrent.org
-domain:api.ipify.org
 domain:akadns.net
 domain:transmissionbt.com
 domain:visa.vfsglobal.com
-
-# === 2026-06-06 ===
 domain:yezi.org
+domain:abacustextile.com
 domain:abacus-textile.com
 
 # === 2026-06-07 ===
