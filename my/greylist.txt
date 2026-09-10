@@ -155,3 +155,6 @@ domain:mcp.exa.ai
 domain:access.if.iq.com
 domain:cache-video.iq.com
 domain:s.102031.xyz
+
+# === 2026-09-03 ===
+domain:sg.tgalileo.com
