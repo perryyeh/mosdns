@@ -38,11 +38,6 @@ domain:cgbchina.com
 domain:amazon.cn
 domain:apple.cn
 domain:apple.com.cn
-domain:cdn-apple.com
-domain:aaplimg.com
-domain:icloud.com
-domain:icloud-content.com
-domain:bdcgslb.com
 
 # === 2026-06-14 ===
 domain:trip.com

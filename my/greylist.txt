@@ -158,3 +158,11 @@ domain:s.102031.xyz
 
 # === 2026-09-03 ===
 domain:sg.tgalileo.com
+
+# === 2026-09-11 ===
+domain:aefd.nelreports.net
+domain:ipv6.connman.net
+domain:unavatar.webp.se
+
+# === 2026-09-12 ===
+domain:ntp.nasa.gov
