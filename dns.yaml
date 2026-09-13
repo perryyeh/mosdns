@@ -90,7 +90,7 @@ plugins:
     args:
       concurrent: 1
       upstreams:
-        - addr: "udp://198.18.0.2"
+        - addr: "udp://198.18.0.2:53"
 
   # fake ip v6
   - tag: forward_fakeipv6
