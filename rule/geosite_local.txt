@@ -5,4 +5,5 @@ domain:localdomain
 domain:lan
 domain:home
 domain:unifi
+full:console.gl-inet.com
 regexp:^[^.]+$
