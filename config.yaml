@@ -11,13 +11,28 @@ include:
 
 plugins:
   # 转发组 - 直连
-  - tag: forward_direct_group
+  - tag: forward_public_direct_group
     type: fallback
     args:
       primary: ali
       secondary: tencent
       threshold: 50
       always_standby: true
+
+  # 运营商优先；公共 DNS 同时待命。默认入口不使用此组。
+  - tag: forward_isp_direct_group
+    type: fallback
+    args:
+      primary: isp
+      secondary: forward_public_direct_group
+      threshold: 50
+      always_standby: true
+
+  # 国内入口：yehbp 仅在启用运营商时切换 exec 目标。
+  - tag: forward_direct_group
+    type: sequence
+    args:
+      - exec: $forward_public_direct_group
 
   # 转发组 - 代理
   - tag: forward_proxy_group

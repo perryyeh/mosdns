@@ -76,6 +76,14 @@ plugins:
           bootstrap: "120.53.53.53"
           enable_pipeline: true
 
+  # 运营商 DNS 占位；由 yehbp 安装时替换，默认不参与国内解析。
+  - tag: isp
+    type: forward
+    args:
+      concurrent: 2
+      upstreams:
+        - addr: "udp://192.0.2.1:53"
+
   # local dns
   - tag: local
     type: forward
