@@ -166,3 +166,14 @@ domain:unavatar.webp.se
 
 # === 2026-09-12 ===
 domain:ntp.nasa.gov
+
+# === 2026-10-03 ===
+domain:wallet.okex.org
+domain:wallet.ouxyi.cash
+domain:web3.cnouxyex.co
+domain:web3.oyimjwcxnt.org
+domain:whois.apnic.net
+domain:whois.arin.net
+
+# === 2026-10-08 ===
+domain:stats.v2core.com
