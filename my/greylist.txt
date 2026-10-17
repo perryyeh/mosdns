@@ -176,4 +176,14 @@ domain:whois.apnic.net
 domain:whois.arin.net
 
 # === 2026-10-08 ===
-domain:stats.v2core.com
+domain:v2core.com
+
+# === 2026-10-12 ===
+domain:okx-httpdns.com
+
+# === 2026-10-13 ===
+domain:adapty.io
+
+# === 2026-10-14 ===
+domain:adaptytech.com
+domain:usemagpie.ai
