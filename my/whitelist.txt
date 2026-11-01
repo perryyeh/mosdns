@@ -52,3 +52,6 @@ domain:itcs-lab.com
 
 # === 2026-08-07 ===
 domain:epg.51zmt.top
+
+# === 2026-11-01 ===
+domain:anker.com

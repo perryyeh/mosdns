@@ -131,8 +131,6 @@ domain:ift.px-cloud.net
 domain:salesmartly.com
 
 # === 2026-08-16 ===
-domain:aiot-mqtt-us.anker.com
-domain:ankerpower-api.anker.com
 
 # === 2026-08-18 ===
 domain:rollout.ada.support
@@ -187,3 +185,9 @@ domain:adapty.io
 # === 2026-10-14 ===
 domain:adaptytech.com
 domain:usemagpie.ai
+
+# === 2026-10-23 ===
+domain:openviking.ai
+
+# === 2026-10-24 ===
+domain:withpersona.com
