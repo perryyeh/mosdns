@@ -1,4 +1,3 @@
-domain:api.cloudflare.com
 domain:api.ipify.org
 domain:ident.me
 domain:ipw.cn
@@ -55,3 +54,4 @@ domain:epg.51zmt.top
 
 # === 2026-11-01 ===
 domain:anker.com
+domain:downloaddispatch.itunes.apple.com

@@ -191,3 +191,6 @@ domain:openviking.ai
 
 # === 2026-10-24 ===
 domain:withpersona.com
+
+# === 2026-11-02 ===
+domain:api.cloudflare.com
