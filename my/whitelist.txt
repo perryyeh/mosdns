@@ -16,9 +16,15 @@ domain:libtorrent.org
 domain:akadns.net
 domain:transmissionbt.com
 domain:visa.vfsglobal.com
-domain:yezi.org
 domain:abacustextile.com
 domain:abacus-textile.com
+domain:yezi.org
+
+# === 2026-06-06 ===
+domain:apple.cn
+domain:apple.com.cn
+domain:downloaddispatch.itunes.apple.com
+domain:captive.apple.com
 
 # === 2026-06-07 ===
 domain:hsbc.com
@@ -26,17 +32,15 @@ domain:hsbc.co.uk
 domain:hsbc.com.mx
 domain:hsbc.com.hk
 domain:hsbc.com.cn
+domain:boc.cn
+domain:cgbchina.com
+
+# === 2026-06-08 ===
+domain:amazon.cn
 domain:online-metrix.net
 domain:medallia.com
 domain:awswaf.com
 domain:vv1865.com
-
-# === 2026-06-08 ===
-domain:boc.cn
-domain:cgbchina.com
-domain:amazon.cn
-domain:apple.cn
-domain:apple.com.cn
 
 # === 2026-06-14 ===
 domain:trip.com
@@ -46,13 +50,10 @@ domain:epsonconnect.com
 domain:flyertrip.com
 
 # === 2026-08-04 ===
+domain:anker.com
 domain:cuktech.net
 domain:itcs-lab.com
 
 # === 2026-08-07 ===
 domain:epg.51zmt.top
 
-# === 2026-11-01 ===
-domain:anker.com
-domain:downloaddispatch.itunes.apple.com
-domain:captive.apple.com

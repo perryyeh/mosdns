@@ -196,5 +196,4 @@ domain:withpersona.com
 domain:api.cloudflare.com
 
 # === 2026-11-04 ===
-domain:relay.alma.now
-domain:updates.alma.now
+domain:alma.now
