@@ -7,7 +7,7 @@
 - 🧠 未明确归类的域名，通过真实 IP 归属自动判定
 - ⚠️ 力求解析路径和结果准确，mosdns 层不启用缓存；如需缓存建议放在 AdGuardHome 等上游/前置组件
 - 🚫 默认不同步公共 blocklist，自定义 blacklist 也尽量保持最小；如需拦截可打开同步配置，或放在 AdGuardHome 中处理
-- 🔁 每日定时同步最新规则名单和 IP 库，并从未命中名单域名中提炼候选，写入 my/ 下的分流列表
+- 🔁 公共 `rule/` 可按日同步。`my/` 名单单独选择：关闭、本机统计后合并，或按日下载；本机合并不推送到 GitHub
 
 ## ⚙️ 修改注意事项（文件dns.yaml）
 - 10.0.0.1 -> 路由器ip，供查询局域网dns（模板值，真实环境按实际 IP 修改）
@@ -69,34 +69,38 @@
 
 ## 🗂️ 规则维护约定
 
-- `rule/` 目录下文件可配置每天自动下载。
-- `my/` 目录下可手动维护，或开启域名自动提升。
-- 自动提升按近 7 天进入 not-in-list 次数超过 50 次。
-- 自动提升只写日期块和 `domain:<qname>`，不写 count/lookback，也不自动合并到父域名。
+- `rule/` 目录下文件可在 `cron/sync.conf` 中打开每日下载。
+- `my/` 目录由 `cron/cron.env` 的 `MOSDNS_MY_MODE` 决定，不在这里改下载地址：
+  - `0`：不统计、不合并、不下载。
+  - `1`：沿用本机日志统计，并把达到阈值的域名写入白名单或灰名单。这不会推送到 GitHub。
+  - `2`：每天 01:00 只下载 `my/whitelist.txt`、`my/greylist.txt`、`my/blacklist.txt`、`my/hosts.txt`。四个文件来自同一次 `perryyeh/mosdns` main 提交；任一失败或校验失败都保留旧文件。黑名单允许为空，其它三个名单和 hosts 不能为空，也不接受 HTML。
+- 模式 2 与本机候选统计、自动合并互斥。运行时即使旧开关仍为开启，也不会做统计或合并，也不会在模式 1 下下载覆盖本机名单。
+- 自动合并仍按近 7 天进入 not-in-list 次数超过 50 次，只写日期块和 `domain:<qname>`。
 
 ## 📖 目录结构
 
 ```text
 rule/     # 公共规则（geosite、geoip、通用分流规则）
 my/       # 自定义规则（hosts、黑名单、白名单、灰名单）
-cron/     # 定时任务：更新规则、汇总候选域名、自动提升高频候选、延迟重载
+cron/     # 定时任务和 sync.conf 来源
 tmp/      # 运行时输出：未命中名单域名的分流日志（not-in-list-direct.txt / not-in-list-proxy.txt）
 ```
 
 ## ⏱️ 定时任务开关
 
-定时任务的开关和阈值都在 `cron/cron.env`。
+公共规则和 my 名单的来源都在 `cron/sync.conf`，格式为 `目标相对路径 | enabled | 来源 URL`。目标只能是 `rule/<文件>` 或 `my/<文件>`；旧的纯文件名按 `rule/<文件>` 解释。绝对路径、`..` 和其它目录会被拒绝。`sync-rules.sh` 只处理 `rule/`，`sync-my.sh` 只处理上面 4 个 my 文件。
 
-公共名单更新来源和每个名单是否同步在 `cron/sync.conf`。要新增/删除公共名单来源，或把某个名单从 `yes` 改成 `no`，直接改这个文件。
-
-需要关闭某项功能时，直接把对应变量改成 `0`：
+开关在 `cron/cron.env`：
 
 - `MOSDNS_SYNC_RULES_ENABLED=0`：关闭 rule/ 公共规则同步
+- `MOSDNS_MY_MODE=0`：关闭 my 名单的本机合并和下载
 - `MOSDNS_SYNC_CANDIDATES_ENABLED=0`：关闭每小时 not-in-list 候选域名汇总
 - `MOSDNS_PROMOTE_ENABLED=0`：关闭每天自动加入 my/whitelist.txt 和 my/greylist.txt
 - `MOSDNS_RELOAD_ENABLED=0`：关闭规则/名单变化后的自动重启流程
 
-候选记录保留天数、自动提升统计窗口和阈值也在同一个文件里改。
+模式 1 会在 00:30 最多重启一次。模式 2 不在 00:30 重启；01:00 下载 my 名单，只有有变化时才在 01:10 重启一次，从而避开公共规则和 my 名单各重启一次。
+
+候选记录保留天数、自动合并统计窗口和阈值也在同一个文件里改。
 
 ## ✅ 手动验证
 
@@ -119,6 +123,7 @@ tmp/      # 运行时输出：未命中名单域名的分流日志（not-in-list
   `tail -n 50 tmp/sync-rules-$(date +%F).log`
   `tail -n 50 tmp/sync-candidates-$(date +%F).log`
   `tail -n 50 tmp/promote-candidates-$(date +%F).log`
+  `tail -n 50 tmp/sync-my-$(date +%F).log`
   `tail -n 50 tmp/reload-$(date +%F).log`
 
 

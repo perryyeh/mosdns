@@ -1,25 +1,28 @@
 #!/bin/sh
-# mosdns rule updater - reads cron/sync.conf, fetches enabled sources
+# mosdns rule updater - reads cron/sync.conf and fetches enabled rule/ sources.
+# my/ lines in the same file are ignored here.
 # Output:
 #   geosite/domain files -> mosdns domain rule lines
 #   geoip_*.txt          -> raw CIDR/IP lines
 
 set -e
 
-CRONENV="/etc/mosdns/cron/cron.env"
+ROOT="${MOSDNS_ROOT:-/etc/mosdns}"
+CRONENV="${CRONENV:-$ROOT/cron/cron.env}"
 [ -f "$CRONENV" ] && . "$CRONENV"
 
-RULES_DIR="/etc/mosdns/rule"
-CONF="/etc/mosdns/cron/sync.conf"
-TMPDIR="/tmp/mosdns-rule-update.$$"
-RELOAD_MARK="/etc/mosdns/tmp/reload-needed"
+RULES_DIR="${RULES_DIR:-$ROOT/rule}"
+CONF="${CONF:-$ROOT/cron/sync.conf}"
+TMPDIR="${TMPDIR_SYNC:-${TMPDIR:-/tmp}/mosdns-rule-update.$$}"
+RELOAD_MARK="${RELOAD_MARK:-$ROOT/tmp/reload-needed}"
+CRON_DIR=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
 
 cleanup() {
     rm -rf "$TMPDIR"
     rm -f "$RULES_DIR"/.*.tmp.$$
 }
 trap cleanup EXIT
-mkdir -p "$TMPDIR" "$RULES_DIR"
+mkdir -p "$TMPDIR" "$RULES_DIR" "$(dirname "$RELOAD_MARK")"
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"; }
 
@@ -28,81 +31,16 @@ if [ "${MOSDNS_SYNC_RULES_ENABLED:-1}" != "1" ]; then
     exit 0
 fi
 
-DNS_CONF="/etc/mosdns/dns.yaml"
-
-get_proxy_bootstrap() {
-    [ -f "$DNS_CONF" ] || return 0
-    bootstrap=$(awk -F'"' '
-        /^[[:space:]]*-[[:space:]]*tag:[[:space:]]*(cloudflare|google)[[:space:]]*$/ { in_proxy = 1; next }
-        /^[[:space:]]*-[[:space:]]*tag:[[:space:]]*/ { in_proxy = 0 }
-        in_proxy && /^[[:space:]]*bootstrap:[[:space:]]*"/ { print $2; exit }
-    ' "$DNS_CONF")
-
-    if [ -n "$bootstrap" ]; then
-        echo "$bootstrap"
-        return 0
-    fi
-
-    # Fallback for this setup: the fake-ip DNS upstream is a DNS server too.
-    awk -F'"' '/^[[:space:]]*- addr:[[:space:]]*"udp:\/\/198\.18\./ { sub(/^udp:\/\//, "", $2); sub(/:.*/, "", $2); print $2; exit }' "$DNS_CONF"
-}
-
+# shellcheck disable=SC1091
+. "$CRON_DIR/sync-target.sh"
+# shellcheck disable=SC1091
+. "$CRON_DIR/fetch.sh"
+DNS_CONF="${DNS_CONF:-$ROOT/dns.yaml}"
 SCRIPT_BOOTSTRAP=$(get_proxy_bootstrap)
 
-url_host() {
-    echo "$1" | sed -n 's#^[A-Za-z][A-Za-z0-9+.-]*://\([^/:]*\).*#\1#p'
+trim() {
+    printf '%s' "$1" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//'
 }
-
-resolve_with_bootstrap() {
-    local r_host="$1"
-    local r_dns="$2"
-    [ -n "$r_host" ] && [ -n "$r_dns" ] || return 1
-    nslookup "$r_host" "$r_dns" 2>/dev/null | awk '
-        /^Address: / && $2 ~ /^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$/ { print $2; exit }
-    '
-}
-
-wget_with_hosts_ip() {
-    local w_url="$1"
-    local w_dst="$2"
-    local w_host="$3"
-    local w_ip="$4"
-    local w_hosts_bak="$TMPDIR/hosts.bak"
-    local w_rc
-
-    cp /etc/hosts "$w_hosts_bak"
-    printf '\n%s %s\n' "$w_ip" "$w_host" >> /etc/hosts
-    timeout 180 wget -q -T 30 -O "$w_dst" "$w_url"
-    w_rc=$?
-    cat "$w_hosts_bak" > /etc/hosts
-    return "$w_rc"
-}
-
-fetch_url() {
-    local f_url="$1"
-    local f_dst="$2"
-    local f_host
-    local f_ip
-    f_host=$(url_host "$f_url")
-
-    # Order: bootstrap DNS/fake-ip -> direct. Current image uses wget only.
-    if [ -n "$SCRIPT_BOOTSTRAP" ] && [ -n "$f_host" ]; then
-        f_ip=$(resolve_with_bootstrap "$f_host" "$SCRIPT_BOOTSTRAP")
-        if [ -n "$f_ip" ]; then
-            if wget_with_hosts_ip "$f_url" "$f_dst" "$f_host" "$f_ip"; then
-                log "  fetched via bootstrap $SCRIPT_BOOTSTRAP ($f_host -> $f_ip)"
-                return 0
-            fi
-            log "WARN: bootstrap fetch failed via $SCRIPT_BOOTSTRAP ($f_host -> $f_ip), trying direct"
-        else
-            log "WARN: bootstrap $SCRIPT_BOOTSTRAP did not return IPv4 for $f_host, trying direct"
-        fi
-    fi
-
-    log "  trying direct fetch"
-    timeout 180 wget -q -T 30 -O "$f_dst" "$f_url"
-}
-
 
 validate_domain_set() {
     file="$1"
@@ -161,13 +99,25 @@ validate_geoip_set() {
 
 updated=0
 while IFS='|' read -r filename enabled url; do
-    # trim whitespace
-    filename=$(echo "$filename" | xargs)
-    enabled=$(echo "$enabled" | xargs)
-    url=$(echo "$url" | xargs)
+    filename=$(trim "$filename")
+    enabled=$(trim "$enabled")
+    url=$(trim "$url")
 
-    # skip comments and empty lines
-    case "$filename" in \#*|"") continue ;; esac
+    case "$filename" in
+        \#*|"") continue ;;
+    esac
+
+    if ! classified=$(mosdns_sync_classify "$filename"); then
+        log "ERROR: reject sync target $filename"
+        continue
+    fi
+    area=${classified%% *}
+    base=${classified#* }
+    if [ "$area" != "rule" ]; then
+        log "skip $filename (handled by my sync)"
+        continue
+    fi
+    filename=$base
 
     if [ "$enabled" != "yes" ]; then
         log "skip $filename (enabled=$enabled)"
@@ -190,7 +140,6 @@ while IFS='|' read -r filename enabled url; do
 
     case "$filename" in
         geoip_*.txt)
-            # Keep CIDR/IP lines as-is; trim whitespace and drop empty/comment lines.
             sed -n 's/[[:space:]]*#.*$//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^$/d; p' "$raw" > "$out"
             if ! validate_geoip_set "$out"; then
                 log "ERROR: validation failed for $filename, keeping existing local file"
@@ -199,7 +148,6 @@ while IFS='|' read -r filename enabled url; do
             fi
             ;;
         *)
-            # Keep mosdns domain rule syntax as-is; trim whitespace and drop empty/comment lines.
             sed -n '/^[[:space:]]*#/d; s/^[[:space:]]*//; s/[[:space:]]*$//; /^$/d; p' "$raw" > "$out"
             if ! validate_domain_set "$out"; then
                 log "ERROR: validation failed for $filename, keeping existing local file"

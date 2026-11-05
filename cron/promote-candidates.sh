@@ -4,10 +4,19 @@
 
 set -e
 
-CRONENV="/etc/mosdns/cron/cron.env"
+ROOT="${MOSDNS_ROOT:-/etc/mosdns}"
+CRONENV="${CRONENV:-$ROOT/cron/cron.env}"
 [ -f "$CRONENV" ] && . "$CRONENV"
+CRON_DIR=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
+# shellcheck disable=SC1091
+. "$CRON_DIR/my-mode.sh"
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"; }
+
+if [ "$(mosdns_my_mode)" = "2" ]; then
+    log "my mode 2; candidate promotion suppressed"
+    exit 0
+fi
 
 if [ "${MOSDNS_PROMOTE_ENABLED:-0}" != "1" ]; then
     log "candidate promotion disabled"

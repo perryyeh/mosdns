@@ -4,11 +4,19 @@
 
 set -e
 
-CRONENV="${CRONENV:-/etc/mosdns/cron/cron.env}"
+ROOT="${MOSDNS_ROOT:-/etc/mosdns}"
+CRONENV="${CRONENV:-$ROOT/cron/cron.env}"
 [ -f "$CRONENV" ] && . "$CRONENV"
+CRON_DIR=$(CDPATH= cd -- "$(dirname "$0")" && pwd)
+# shellcheck disable=SC1091
+. "$CRON_DIR/my-mode.sh"
+if [ "$(mosdns_my_mode)" = "2" ]; then
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] my mode 2; candidate sync suppressed"
+    exit 0
+fi
 
 LOG_FILE="${LOG_FILE:-/dev/shm/mosdns.log}"
-OUT_DIR="${OUT_DIR:-/etc/mosdns/tmp}"
+OUT_DIR="${OUT_DIR:-$ROOT/tmp}"
 DIRECT_OUT="$OUT_DIR/not-in-list-direct.txt"
 PROXY_OUT="$OUT_DIR/not-in-list-proxy.txt"
 TMPDIR="/tmp/mosdns-not-in-list.$$"
