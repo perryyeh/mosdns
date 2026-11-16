@@ -19,6 +19,8 @@ domain:nflximg.net
 domain:nflxsearch.net
 domain:nflxso.net
 domain:nflxvideo.net
+# claude日志
+domain:datadoghq.com
 
 # === 2026-06-06 ===
 domain:giscus.app
@@ -104,9 +106,6 @@ domain:bettercotton.org
 domain:cdn.datatables.net
 domain:os.idfl.com
 domain:posthog.com
-
-# === 2026-07-11 ===
-domain:datadoghq.com
 
 # === 2026-07-28 ===
 domain:met.no
@@ -197,3 +196,29 @@ domain:api.cloudflare.com
 
 # === 2026-11-04 ===
 domain:alma.now
+
+# === 2026-11-05 ===
+domain:cdn.zimperium.com
+domain:locker.klarna.com
+
+# === 2026-11-07 ===
+domain:analyze.buxefaex.cc
+domain:api.sorani.cc
+domain:guipianwu.com
+domain:iot-hub-prod-az1.plovercrest.com
+domain:iot-hub-prod-az3.plovercrest.com
+domain:iot-hub-prod.plovercrest.com
+domain:notify-svc-main-r1.whinbrook.com
+domain:notify-svc-main.whinbrook.com
+domain:stun.services.mozilla1.com
+domain:www.jennyhow.com
+
+# === 2026-11-09 ===
+domain:data-v2.hacs.xyz
+
+# === 2026-11-11 ===
+domain:iot-hub-staging-v6.plovercrest.com
+domain:iot-hub-staging.plovercrest.com
+
+# === 2026-11-14 ===
+domain:e-0014.e-msedge.net
