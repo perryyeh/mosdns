@@ -59,8 +59,4 @@ domain:epg.51zmt.top
 
 
 # === 2026-11-07 ===
-domain:iot-hub-prod-az3.plovercrest.com
-
-# === 2026-11-11 ===
-domain:iot-hub-staging-v6.plovercrest.com
-domain:iot-hub-staging.plovercrest.com
+domain:plovercrest.com
